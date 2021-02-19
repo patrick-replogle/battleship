@@ -5,12 +5,18 @@ import Ship from './ship/Ship';
 
 import { rowLabels, colLabels, ships, buildBoard } from '../utilities';
 
-const PlayerBoard = ({ isPlaying }) => {
+const PlayerBoard = ({ isPlaying, setIsPlaying }) => {
     const [board, setBoard] = useState(buildBoard());
     const [playerShips, setPlayerShips] = useState(ships);
     const [selectedShip, setSelectedShip] = useState(0);
     const [vertical, setVertical] = useState(false);
     const [readyToPlay, setReadyToPlay] = useState(false);
+
+    const resetBoard = () => {
+        setBoard(buildBoard);
+        setSelectedShip(0);
+        setIsPlaying();
+    };
 
     return (
         <div>
@@ -40,6 +46,8 @@ const PlayerBoard = ({ isPlaying }) => {
                 />
             </div>
             <button onClick={() => setVertical(!vertical)}>Change Direction</button>
+            <button onClick={resetBoard}>Reset</button>
+            <button>Start</button>
         </div>
     );
 };

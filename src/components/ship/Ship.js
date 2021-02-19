@@ -6,8 +6,8 @@ const Ship = ({ shipIdx }) => {
         <Container>
             <StyledP>{ships[shipIdx].name}</StyledP>
             <StyledDiv>
-                {ships[shipIdx].ship.map((col) => {
-                    return <Cell></Cell>;
+                {ships[shipIdx].ship.map((col, index) => {
+                    return <Cell key={index}></Cell>;
                 })}
             </StyledDiv>
         </Container>

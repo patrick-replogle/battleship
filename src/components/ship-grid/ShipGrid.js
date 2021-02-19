@@ -18,6 +18,7 @@ const ShipGrid = ({ board, setBoard, vertical, selectedShip, setSelectedShip, re
                                     setSelectedShip={setSelectedShip}
                                     readyToPlay={readyToPlay}
                                     col={col}
+                                    key={j}
                                 />
                             );
                         })}
