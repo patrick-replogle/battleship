@@ -6,22 +6,27 @@ export const ships = [
     {
         name: 'Carrier',
         length: 5,
+        ship: [0, 0, 0, 0, 0],
     },
     {
         name: 'Battleship',
         length: 4,
+        ship: [0, 0, 0, 0],
     },
     {
         name: 'Cruiser',
         length: 3,
+        ship: [0, 0, 0],
     },
     {
         name: 'Submarine',
         length: 3,
+        ship: [0, 0, 0],
     },
     {
         name: 'Destroyer',
         length: 2,
+        ship: [0, 0, 0],
     },
 ];
 

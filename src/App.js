@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import GlobalStyles from './components/global-styles';
 import PlayerBoard from './components/PlayerBoard';
 import PlayerMovesBoard from './components/PlayerMovesBoard';
+import Footer from './components/footer/Footer';
 
 const App = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -17,8 +18,9 @@ const App = () => {
             <h1>battleship</h1>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <PlayerBoard isPlaying={isPlaying} />
-                <PlayerMovesBoard />
+                {/* <PlayerMovesBoard /> */}
             </div>
+            <Footer />
         </>
     );
 };

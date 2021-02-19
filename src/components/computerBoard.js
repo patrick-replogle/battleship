@@ -1,14 +1,12 @@
 import React from 'react';
 
+import { buildBoard, copyBoard } from '../utilities';
+
 class ComputerBoard extends React.Component {
     state = {
-        board: this.buildBoard(),
+        board: buildBoard(),
         guesses: [],
         hits: [],
-    };
-
-    buildBoard = () => {
-        return new Array(10).fill().map(() => new Array(10).fill(0));
     };
 
     copyBoard = () => {
