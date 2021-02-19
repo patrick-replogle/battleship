@@ -7,7 +7,6 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         min-height: 100vh;
-        background-color: white;
     }
     
     html, body {

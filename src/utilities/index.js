@@ -6,22 +6,27 @@ export const ships = [
     {
         name: 'Carrier',
         length: 5,
+        ship: [0, 0, 0, 0, 0],
     },
     {
         name: 'Battleship',
         length: 4,
+        ship: [0, 0, 0, 0],
     },
     {
         name: 'Cruiser',
         length: 3,
+        ship: [0, 0, 0],
     },
     {
         name: 'Submarine',
         length: 3,
+        ship: [0, 0, 0],
     },
     {
         name: 'Destroyer',
         length: 2,
+        ship: [0, 0, 0],
     },
 ];
 
@@ -120,4 +125,63 @@ export const handleHover = (i, j, board, vertical, readyToPlay, selectedShip, cb
         }
         cb(newBoard);
     }
+};
+
+export const generateComputerBoard = () => {
+    let board = buildBoard();
+    let shipIdx = 0;
+    let copy;
+
+    while (shipIdx < 5) {
+        let shipLen = ships[shipIdx].length;
+        let row = Math.floor(Math.random() * 10);
+        let col = Math.floor(Math.random() * 10);
+        let vertical = Math.floor(Math.random() * 2);
+
+        if (vertical) {
+            const diff = 10 - (row + shipLen);
+            if (diff < 0) row += diff;
+
+            if (!checkIfVacant(row, col, shipLen, board, vertical)) continue;
+
+            copy = copyBoard(board);
+            for (let i = 0; i < shipLen; i++) {
+                copy[row][col].status = 1;
+                row++;
+            }
+        } else {
+            const diff = 10 - (col + shipLen);
+            if (diff < 0) col += diff;
+
+            if (!checkIfVacant(row, col, shipLen, board, vertical)) continue;
+
+            copy = copyBoard(board);
+            for (let i = 0; i < shipLen; i++) {
+                copy[row][col].status = 1;
+                col++;
+            }
+        }
+        board = copyBoard(copy);
+        shipIdx++;
+    }
+    return board;
+};
+
+const checkIfVacant = (row, col, shipLen, board, vertical) => {
+    if (vertical) {
+        for (let i = 0; i < shipLen; i++) {
+            if (board[row][col].status === 1) {
+                return false;
+            }
+            row++;
+        }
+    } else {
+        for (let i = 0; i < shipLen; i++) {
+            if (board[row][col].status === 1) {
+                return false;
+            }
+            col++;
+        }
+    }
+    return true;
 };
