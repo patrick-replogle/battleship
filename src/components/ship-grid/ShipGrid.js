@@ -4,8 +4,8 @@ const ShipGrid = ({
     board,
     setBoard,
     vertical,
-    selectedShip,
-    setSelectedShip,
+    shipIdx,
+    setShipIdx,
     readyToPlay,
     playerShipLocations,
     setPlayerShipLocations,
@@ -23,8 +23,8 @@ const ShipGrid = ({
                                     board={board}
                                     setBoard={setBoard}
                                     vertical={vertical}
-                                    selectedShip={selectedShip}
-                                    setSelectedShip={setSelectedShip}
+                                    shipIdx={shipIdx}
+                                    setShipIdx={setShipIdx}
                                     readyToPlay={readyToPlay}
                                     col={col}
                                     key={j}

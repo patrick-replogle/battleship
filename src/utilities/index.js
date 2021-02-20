@@ -36,7 +36,7 @@ export const buildBoard = () => {
     for (let row = 0; row < 10; row++) {
         let row = [];
         for (let col = 0; col < 10; col++) {
-            row.push({ status: 0, hover: false });
+            row.push({ status: 0, hover: false, clicked: false });
         }
         newBoard.push(row);
     }
@@ -49,6 +49,7 @@ export const copyBoard = (currBoard) => {
     currBoard.forEach((row, i) => {
         row.forEach((col, j) => {
             newBoard[i][j].status = currBoard[i][j].status;
+            newBoard[i][j].clicked = currBoard[i][j].clicked;
         });
     });
     return newBoard;

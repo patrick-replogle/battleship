@@ -1,26 +1,17 @@
-import React, { useState } from 'react';
+import { colLabels, rowLabels, copyBoard } from '../utilities';
 
-import { generateComputerBoard, colLabels, rowLabels } from '../utilities';
-
-const initialShipLocationState = {
-    Carrier: [],
-    Battleship: [],
-    Cruiser: [],
-    Submarine: [],
-    Destroyer: [],
-};
-
-const ComputerBoard = ({ playersTurn, setPlayersTurn }) => {
-    const [computerShipLocations, setComputerShipLocations] = useState(initialShipLocationState);
-    const [computerBoard, setComputerBoard] = useState(generateComputerBoard(computerShipLocations));
-    const [moves, setMoves] = useState([]);
-    const [hits, setHits] = useState([]);
-    const [computerShip, setComputerShips] = useState(5);
-
-    const handleClick = (e) => {
-        if (!e.target.textContent && playersTurn) {
-            e.target.textContent = 'X';
-        }
+const ComputerBoard = ({
+    playersTurn,
+    setPlayersTurn,
+    computerShipLocations,
+    setComputerShipLocations,
+    computerBoard,
+    setComputerBoard,
+}) => {
+    const handleClick = (e, row, col) => {
+        const copy = copyBoard(computerBoard);
+        copy[row][col].clicked = true;
+        setComputerBoard(copy);
     };
 
     return (
@@ -59,8 +50,10 @@ const ComputerBoard = ({ playersTurn, setPlayersTurn }) => {
                                             color: col.status === 0 ? 'white' : col.status === 1 ? '#f44336' : 'black',
                                         }}
                                         key={j}
-                                        onClick={(e) => handleClick(e)}
-                                    ></div>
+                                        onClick={(e) => handleClick(e, i, j)}
+                                    >
+                                        {col.clicked ? 'X' : ''}
+                                    </div>
                                 );
                             })}
                         </div>
