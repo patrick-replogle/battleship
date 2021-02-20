@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
-
 import ShipGrid from './ship-grid/ShipGrid';
-import Ship from './ship/Ship';
 
-import { rowLabels, colLabels, ships, buildBoard } from '../utilities';
+import { rowLabels, colLabels } from '../utilities';
 
-const PlayerBoard = ({ isPlaying, setIsPlaying }) => {
-    const [board, setBoard] = useState(buildBoard());
-    const [playerShips, setPlayerShips] = useState(ships);
-    const [selectedShip, setSelectedShip] = useState(0);
-    const [vertical, setVertical] = useState(false);
-    const [readyToPlay, setReadyToPlay] = useState(false);
-
-    const resetBoard = () => {
-        setBoard(buildBoard);
-        setSelectedShip(0);
-        setIsPlaying();
-    };
-
+const PlayerBoard = ({
+    playerBoard,
+    setPlayerBoard,
+    playerShipsLeft,
+    setPlayerShipsLeft,
+    playerShipLocations,
+    setPlayerShipLocations,
+    isPlaying,
+    setIsPlaying,
+    vertical,
+    setVertical,
+    readyToPlay,
+    setReadyToPlay,
+    shipIdx,
+    setShipIdx,
+}) => {
     return (
         <div>
-            {selectedShip < ships.length && <Ship shipIdx={selectedShip} />}
             <div style={{ display: 'flex', marginLeft: '35px' }}>
                 {colLabels.map((row, index) => (
                     <div key={index} style={{ width: '40px', height: '40px', fontSize: '2rem' }}>
@@ -37,17 +36,17 @@ const PlayerBoard = ({ isPlaying, setIsPlaying }) => {
                     ))}
                 </div>
                 <ShipGrid
-                    board={board}
-                    setBoard={setBoard}
+                    board={playerBoard}
+                    setBoard={setPlayerBoard}
                     vertical={vertical}
-                    selectedShip={selectedShip}
-                    setSelectedShip={setSelectedShip}
+                    shipIdx={shipIdx}
+                    setShipIdx={setShipIdx}
                     readyToPlay={readyToPlay}
+                    playerShipLocations={playerShipLocations}
+                    setPlayerShipLocations={setPlayerShipLocations}
+                    setReadyToPlay={setReadyToPlay}
                 />
             </div>
-            <button onClick={() => setVertical(!vertical)}>Change Direction</button>
-            <button onClick={resetBoard}>Reset</button>
-            <button>Start</button>
         </div>
     );
 };

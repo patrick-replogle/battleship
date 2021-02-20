@@ -30,13 +30,29 @@ export const ships = [
     },
 ];
 
+export const initialPlayerShipState = {
+    Carrier: [],
+    Battleship: [],
+    Cruiser: [],
+    Submarine: [],
+    Destroyer: [],
+};
+
+export const initialComputerShipState = {
+    Carrier: [],
+    Battleship: [],
+    Cruiser: [],
+    Submarine: [],
+    Destroyer: [],
+};
+
 export const buildBoard = () => {
     let newBoard = [];
 
-    for (let i = 0; i < 10; i++) {
+    for (let row = 0; row < 10; row++) {
         let row = [];
-        for (let j = 0; j < 10; j++) {
-            row.push({ status: 0, hover: false });
+        for (let col = 0; col < 10; col++) {
+            row.push({ status: 0, hover: false, clicked: false, alive: true });
         }
         newBoard.push(row);
     }
@@ -46,120 +62,130 @@ export const buildBoard = () => {
 export const copyBoard = (currBoard) => {
     const newBoard = buildBoard();
 
-    currBoard.forEach((row, i) => {
-        row.forEach((col, j) => {
-            newBoard[i][j].status = currBoard[i][j].status;
-        });
-    });
+    for (let row = 0; row < 10; row++) {
+        for (let col = 0; col < 10; col++) {
+            newBoard[row][col].status = currBoard[row][col].status;
+            newBoard[row][col].clicked = currBoard[row][col].clicked;
+            newBoard[row][col].alive = currBoard[row][col].alive;
+        }
+    }
     return newBoard;
 };
 
-export const isSpaceOccupied = (i, j, shipLen, vertical, board) => {
+export const isSpaceOccupied = (row, col, shipLen, vertical, board) => {
     if (vertical) {
         for (let k = 0; k < shipLen; k++) {
-            if (board[i][j].status === 1) return true;
-            i++;
+            if (board[row][col].status === 1) return true;
+            row++;
         }
     } else {
         for (let k = 0; k < shipLen; k++) {
-            if (board[i][j].status === 1) return true;
-            j++;
+            if (board[row][col].status === 1) return true;
+            col++;
         }
     }
     return false;
 };
 
-export const placeShip = (i, j, board, selectedShip, vertical, cb1, cb2) => {
-    if (selectedShip < ships.length) {
+export const placeShip = (row, col, board, shipIdx, vertical, cb1, cb2, dict) => {
+    if (shipIdx < ships.length) {
         const newBoard = copyBoard(board);
-        const shipLen = ships[selectedShip].length;
+        const shipLen = ships[shipIdx].length;
 
         if (!vertical) {
-            const diff = newBoard[0].length - (j + shipLen);
+            const diff = newBoard[0].length - (col + shipLen);
 
-            if (diff < 0) j += diff;
-
-            if (isSpaceOccupied(i, j, shipLen, vertical, board)) return;
+            if (diff < 0) col += diff;
+            if (isSpaceOccupied(row, col, shipLen, vertical, board)) return;
 
             for (let k = 0; k < shipLen; k++) {
-                newBoard[i][j].status = 1;
-                j++;
+                dict[ships[shipIdx].name].push([row, col]);
+                newBoard[row][col].status = 1;
+                col++;
             }
         } else {
-            const diff = newBoard.length - (i + shipLen);
-            if (diff < 0) i += diff;
+            const diff = newBoard.length - (row + shipLen);
 
-            if (isSpaceOccupied(i, j, shipLen, vertical, board)) return;
+            if (diff < 0) row += diff;
+            if (isSpaceOccupied(row, col, shipLen, vertical, board)) return;
 
             for (let k = 0; k < shipLen; k++) {
-                newBoard[i][j].status = 1;
-                i++;
+                newBoard[row][col].status = 1;
+                dict[ships[shipIdx].name].push([row, col]);
+                row++;
             }
         }
         cb1(newBoard);
-        cb2(selectedShip + 1);
+        cb2(shipIdx + 1);
     }
 };
 
-export const handleHover = (i, j, board, vertical, readyToPlay, selectedShip, cb) => {
-    if (!readyToPlay && selectedShip < ships.length) {
-        const shipLen = ships[selectedShip].length;
+export const handleHover = (row, col, board, vertical, readyToPlay, shipIdx, cb) => {
+    if (!readyToPlay && shipIdx < ships.length) {
+        const shipLen = ships[shipIdx].length;
         const newBoard = copyBoard(board);
 
         if (!vertical) {
-            const diff = 10 - (j + shipLen);
-            if (diff < 0) j += diff;
+            const diff = 10 - (col + shipLen);
+            if (diff < 0) col += diff;
 
             for (let k = 0; k < shipLen; k++) {
-                newBoard[i][j].hover = true;
-                j++;
+                newBoard[row][col].hover = true;
+                col++;
             }
         } else {
-            const diff = 10 - (i + shipLen);
-            if (diff < 0) i += diff;
+            const diff = 10 - (row + shipLen);
+            if (diff < 0) row += diff;
 
             for (let k = 0; k < shipLen; k++) {
-                newBoard[i][j].hover = true;
-                i++;
+                newBoard[row][col].hover = true;
+                row++;
             }
         }
         cb(newBoard);
     }
 };
 
-export const generateComputerBoard = () => {
+export const generateComputerBoard = (dict) => {
     let board = buildBoard();
     let shipIdx = 0;
-    let copy;
 
     while (shipIdx < 5) {
         let shipLen = ships[shipIdx].length;
         let row = Math.floor(Math.random() * 10);
         let col = Math.floor(Math.random() * 10);
         let vertical = Math.floor(Math.random() * 2);
+        let shipCoordinates = [];
+        let copy;
 
         if (vertical) {
-            const diff = 10 - (row + shipLen);
-            if (diff < 0) row += diff;
+            let diff = 10 - (row + shipLen);
 
-            if (!checkIfVacant(row, col, shipLen, board, vertical)) continue;
+            if (diff < 0) row += diff;
+            if (!checkIfVacant(row, col, shipLen, board, true)) continue;
 
             copy = copyBoard(board);
+
             for (let i = 0; i < shipLen; i++) {
+                shipCoordinates.push([row, col]);
                 copy[row][col].status = 1;
                 row++;
             }
+            dict[ships[shipIdx].name] = shipCoordinates;
         } else {
-            const diff = 10 - (col + shipLen);
-            if (diff < 0) col += diff;
+            let diff = 10 - (col + shipLen);
 
-            if (!checkIfVacant(row, col, shipLen, board, vertical)) continue;
+            if (diff < 0) col += diff;
+            if (!checkIfVacant(row, col, shipLen, board, false)) continue;
 
             copy = copyBoard(board);
+
             for (let i = 0; i < shipLen; i++) {
+                shipCoordinates.push([row, col]);
                 copy[row][col].status = 1;
                 col++;
             }
+            dict[ships[shipIdx].name] = shipCoordinates;
         }
         board = copyBoard(copy);
         shipIdx++;
@@ -171,17 +197,56 @@ const checkIfVacant = (row, col, shipLen, board, vertical) => {
     if (vertical) {
         for (let i = 0; i < shipLen; i++) {
             if (board[row][col].status === 1) {
-                return false;
+                return false; // ship has already been placed here
             }
             row++;
         }
     } else {
         for (let i = 0; i < shipLen; i++) {
             if (board[row][col].status === 1) {
-                return false;
+                return false; // ship has already been placed here
             }
             col++;
         }
     }
     return true;
+};
+
+export const detectSink = (row, col, dict, board) => {
+    for (let ship in dict) {
+        for (let [i, j] of dict[ship]) {
+            if (row === i && col === j) {
+                let flag = true;
+                for (let [x, y] of dict[ship]) {
+                    if (board[x][y].status !== 2) {
+                        flag = false; // only part of ship has been hit
+                        break;
+                    }
+                }
+                if (flag) {
+                    for (let [x, y] of dict[ship]) {
+                        board[x][y].alive = false; // ship has been sunk
+                        console.log([x, y]);
+                    }
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+};
+
+export const computersTurn = (playerBoard, prevMove, wasPrevMoveAHit) => {
+    while (true) {
+        let row = Math.floor(Math.random() * 10);
+        let col = Math.floor(Math.random() * 10);
+
+        if (playerBoard[row][col].clicked) continue;
+
+        playerBoard[row][col].clicked = true;
+        if (playerBoard[row][col] === 1) {
+            playerBoard[row][col] = 2;
+        }
+        return [row, col];
+    }
 };

@@ -1,6 +1,16 @@
 import Cell from '../cell/Cell';
 
-const ShipGrid = ({ board, setBoard, vertical, selectedShip, setSelectedShip, readyToPlay }) => {
+const ShipGrid = ({
+    board,
+    setBoard,
+    vertical,
+    shipIdx,
+    setShipIdx,
+    readyToPlay,
+    playerShipLocations,
+    setPlayerShipLocations,
+    setReadyToPlay,
+}) => {
     return (
         <div>
             {board.map((row, i) => {
@@ -14,11 +24,14 @@ const ShipGrid = ({ board, setBoard, vertical, selectedShip, setSelectedShip, re
                                     board={board}
                                     setBoard={setBoard}
                                     vertical={vertical}
-                                    selectedShip={selectedShip}
-                                    setSelectedShip={setSelectedShip}
+                                    shipIdx={shipIdx}
+                                    setShipIdx={setShipIdx}
                                     readyToPlay={readyToPlay}
                                     col={col}
                                     key={j}
+                                    playerShipLocations={playerShipLocations}
+                                    setPlayerShipLocations={setPlayerShipLocations}
+                                    setReadyToPlay={setReadyToPlay}
                                 />
                             );
                         })}
