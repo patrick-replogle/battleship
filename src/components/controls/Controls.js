@@ -15,22 +15,11 @@ const Controls = ({
     playerShipsLeft,
     computerShipsLeft,
     resetBoard,
+    playerWins,
+    computerWins,
 }) => {
     return (
-        <div>
-            {isPlaying && playersTurn ? (
-                <h1 style={{ fontSize: '2rem' }}>Your turn</h1>
-            ) : isPlaying && !playersTurn ? (
-                <h1 style={{ fontSize: '2rem' }}>Computer's Turn</h1>
-            ) : (
-                ''
-            )}
-            {isPlaying && (
-                <div style={{ display: 'flex', justifyContent: 'center', fontSize: '1rem' }}>
-                    <h1>{playerShipsLeft} Player Ships Left</h1>
-                    <h1 style={{ marginLeft: '3%' }}>{computerShipsLeft} Computer Ships Left</h1>
-                </div>
-            )}
+        <div style={{ marginTop: '15px' }}>
             {!readyToPlay && !isPlaying && <Button onClick={() => setVertical(!vertical)}>Change Direction</Button>}
             {readyToPlay && !isPlaying && (
                 <Button
@@ -42,7 +31,6 @@ const Controls = ({
                     Start
                 </Button>
             )}
-
             <Button onClick={resetBoard}>Reset</Button>
         </div>
     );

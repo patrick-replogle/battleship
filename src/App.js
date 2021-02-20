@@ -64,7 +64,17 @@ const App = () => {
         <>
             <GlobalStyles />
             <div>
-                <h1 style={{ fontSize: '4rem' }}>Battleship</h1>
+                <h1 style={{ fontSize: '3rem' }}>BATTLESHIP</h1>
+                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'left', fontSize: '1rem' }}>
+                    <div>
+                        <h1>Player Ships: {playerShipsLeft}</h1>
+                        <h1>Player Wins: {playerWins}</h1>
+                    </div>
+                    <div>
+                        <h1>Computer Ships: {computerShipsLeft}</h1>
+                        <h1>Computer Wins: {computerWins}</h1>
+                    </div>
+                </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <PlayerBoard
@@ -86,6 +96,7 @@ const App = () => {
                         />
                         <ComputerBoard
                             isPlaying={isPlaying}
+                            setIsPlaying={setIsPlaying}
                             playersTurn={playersTurn}
                             setPlayersTurn={setPlayersTurn}
                             computerShipLocations={computerShipLocations}
@@ -94,6 +105,15 @@ const App = () => {
                             computerBoard={computerBoard}
                             setComputerBoard={setComputerBoard}
                             resetBoard={resetBoard}
+                            playerWins={playerWins}
+                            setPlayerWins={setPlayerWins}
+                            playerBoard={playerBoard}
+                            setPlayerBoard={setPlayerBoard}
+                            playerShipsLeft={playerShipsLeft}
+                            setPlayerShipsLeft={setPlayerShipsLeft}
+                            computerWins={computerWins}
+                            setComputerWins={setComputerWins}
+                            playerShipLocations={playerShipLocations}
                         />
                     </div>
                 </div>
@@ -116,6 +136,8 @@ const App = () => {
                     computerShipsLeft={computerShipsLeft}
                     setComputerShipsLeft={setComputerShipsLeft}
                     resetBoard={resetBoard}
+                    playerWins={playerWins}
+                    computerWins={computerWins}
                 />
             </div>
             <Footer />

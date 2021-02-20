@@ -1,4 +1,4 @@
-import { colLabels, rowLabels, copyBoard, detectSink } from '../utilities';
+import { colLabels, rowLabels, copyBoard, detectSink, computersTurn } from '../utilities';
 
 const ComputerBoard = ({
     isPlaying,
@@ -12,22 +12,50 @@ const ComputerBoard = ({
     computerShipsLeft,
     setComputerShipsLeft,
     resetBoard,
+    playerWins,
+    setPlayerWins,
+    playerBoard,
+    setPlayerBoard,
+    playerShipsLeft,
+    setPlayerShipsLeft,
+    computerWins,
+    setComputerWins,
+    playerShipLocations,
 }) => {
     const handleClick = (row, col) => {
-        if (isPlaying && playersTurn) {
+        if (isPlaying && playersTurn && !computerBoard[row][col].clicked) {
+            // player moves
             const copy = copyBoard(computerBoard);
             copy[row][col].clicked = true;
 
             if (copy[row][col].status === 1) {
                 copy[row][col].status = 2;
-            }
-            if (detectSink(row, col, computerShipLocations, copy)) {
-                setComputerShipsLeft(computerShipsLeft - 1);
-                if (computerShipsLeft === 0) {
-                    alert('You win!');
+                if (detectSink(row, col, computerShipLocations, copy)) {
+                    setComputerShipsLeft(computerShipsLeft - 1);
+                    if (computerShipsLeft - 1 === 0) {
+                        setIsPlaying(false);
+                        setPlayerWins(playerWins + 1);
+                    }
                 }
             }
+            setPlayersTurn(false);
             setComputerBoard(copy);
+            // then computer moves
+            const playerCopy = copyBoard(playerBoard);
+            const [x, y] = computersTurn(playerCopy);
+
+            if (playerCopy[x][y].status === 1) {
+                playerCopy[x][y].status = 2;
+                if (detectSink(x, y, playerShipLocations, playerCopy)) {
+                    setPlayerShipsLeft(playerShipsLeft - 1);
+                    if (playerShipsLeft - 1 === 0) {
+                        setIsPlaying(false);
+                        setComputerWins(computerWins + 1);
+                    }
+                }
+            }
+            setPlayerBoard(playerCopy);
+            setPlayersTurn(true);
         }
     };
 

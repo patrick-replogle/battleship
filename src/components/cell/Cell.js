@@ -19,16 +19,17 @@ const Cell = ({
     return (
         <StyledDiv
             style={{
+                color: col.status === 0 ? 'white' : col.status >= 1 && col.alive ? '#f44336' : 'black',
                 background:
                     col.hover && col.status === 1
                         ? '#f44336'
                         : col.hover
-                        ? '#ff9800'
+                        ? '#ffea00'
                         : col.status === 0
                         ? '#006994'
-                        : col.status === 1
+                        : col.status >= 1
                         ? '#848482'
-                        : 'black',
+                        : '',
             }}
             key={j}
             onClick={() => {
@@ -39,7 +40,7 @@ const Cell = ({
                 if (shipIdx < 5) handleHover(i, j, board, vertical, readyToPlay, shipIdx, setBoard);
             }}
         >
-            {col.status === 3 ? 'X' : ''}
+            {col.clicked && 'X'}
         </StyledDiv>
     );
 };

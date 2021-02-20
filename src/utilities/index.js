@@ -181,14 +181,14 @@ const checkIfVacant = (row, col, shipLen, board, vertical) => {
     if (vertical) {
         for (let i = 0; i < shipLen; i++) {
             if (board[row][col].status === 1) {
-                return false;
+                return false; // ship has already been placed here
             }
             row++;
         }
     } else {
         for (let i = 0; i < shipLen; i++) {
             if (board[row][col].status === 1) {
-                return false;
+                return false; // ship has already been placed here
             }
             col++;
         }
@@ -210,6 +210,7 @@ export const detectSink = (row, col, dict, board) => {
                 if (flag) {
                     for (let [x, y] of dict[ship]) {
                         board[x][y].alive = false; // ship has been sunk
+                        console.log([x, y]);
                     }
                     return true;
                 }
@@ -217,4 +218,19 @@ export const detectSink = (row, col, dict, board) => {
         }
     }
     return false;
+};
+
+export const computersTurn = (playerBoard) => {
+    console.log(playerBoard);
+    while (true) {
+        let row = Math.floor(Math.random() * 10);
+        let col = Math.floor(Math.random() * 10);
+
+        if (playerBoard[row][col].clicked) continue;
+        playerBoard[row][col].clicked = true;
+        if (playerBoard[row][col] === 1) {
+            playerBoard[row][col] = 2;
+        }
+        return [row, col];
+    }
 };
