@@ -1,62 +1,45 @@
 import { colLabels, rowLabels, copyBoard, detectSink, computersTurn } from '../utilities';
 
-const ComputerBoard = ({
-    isPlaying,
-    setIsPlaying,
-    playersTurn,
-    setPlayersTurn,
-    computerShipLocations,
-    setComputerShipLocations,
-    computerBoard,
-    setComputerBoard,
-    computerShipsLeft,
-    setComputerShipsLeft,
-    resetBoard,
-    playerWins,
-    setPlayerWins,
-    playerBoard,
-    setPlayerBoard,
-    playerShipsLeft,
-    setPlayerShipsLeft,
-    computerWins,
-    setComputerWins,
-    playerShipLocations,
-}) => {
-    const handleClick = (row, col) => {
-        if (isPlaying && playersTurn && !computerBoard[row][col].clicked) {
-            // player moves
-            const copy = copyBoard(computerBoard);
+const ComputerBoard = (props) => {
+    const handlePlayerTurn = (row, col) => {
+        if (props.isPlaying && props.playersTurn && !props.computerBoard[row][col].clicked) {
+            const copy = copyBoard(props.computerBoard);
             copy[row][col].clicked = true;
 
             if (copy[row][col].status === 1) {
                 copy[row][col].status = 2;
-                if (detectSink(row, col, computerShipLocations, copy)) {
-                    setComputerShipsLeft(computerShipsLeft - 1);
-                    if (computerShipsLeft - 1 === 0) {
-                        setIsPlaying(false);
-                        setPlayerWins(playerWins + 1);
+                if (detectSink(row, col, props.computerShipLocations, copy)) {
+                    props.setComputerShipsLeft(props.computerShipsLeft - 1);
+                    if (props.computerShipsLeft - 1 === 0) {
+                        props.setIsPlaying(false);
+                        props.setPlayerWins(props.playerWins + 1);
                     }
                 }
             }
-            setPlayersTurn(false);
-            setComputerBoard(copy);
-            // then computer moves
-            const playerCopy = copyBoard(playerBoard);
-            const [x, y] = computersTurn(playerCopy);
-
-            if (playerCopy[x][y].status === 1) {
-                playerCopy[x][y].status = 2;
-                if (detectSink(x, y, playerShipLocations, playerCopy)) {
-                    setPlayerShipsLeft(playerShipsLeft - 1);
-                    if (playerShipsLeft - 1 === 0) {
-                        setIsPlaying(false);
-                        setComputerWins(computerWins + 1);
-                    }
-                }
-            }
-            setPlayerBoard(playerCopy);
-            setPlayersTurn(true);
+            props.setPlayersTurn(false);
+            props.setComputerBoard(copy);
+            setTimeout(() => {
+                handleComputerTurn(); // trigger the computer's turn
+            }, 200);
         }
+    };
+
+    const handleComputerTurn = () => {
+        const playerCopy = copyBoard(props.playerBoard);
+        const [x, y] = computersTurn(playerCopy, props.prevComputerMove, props.wasPrevMoveAHit);
+
+        if (playerCopy[x][y].status === 1) {
+            playerCopy[x][y].status = 2;
+            if (detectSink(x, y, props.playerShipLocations, playerCopy)) {
+                props.setPlayerShipsLeft(props.playerShipsLeft - 1);
+                if (props.playerShipsLeft - 1 === 0) {
+                    props.setIsPlaying(false);
+                    props.setComputerWins(props.computerWins + 1);
+                }
+            }
+        }
+        props.setPlayerBoard(playerCopy);
+        props.setPlayersTurn(true);
     };
 
     return (
@@ -77,13 +60,13 @@ const ComputerBoard = ({
                     ))}
                 </div>
 
-                {computerBoard.map((row, i) => {
+                {props.computerBoard.map((row, i) => {
                     return (
                         <div style={{ display: 'flex', flexDirection: 'column' }} key={i}>
                             {row.map((col, j) => {
                                 return (
                                     <div
-                                        onClick={() => handleClick(i, j)}
+                                        onClick={() => handlePlayerTurn(i, j)}
                                         key={j}
                                         style={{
                                             width: '40px',

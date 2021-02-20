@@ -13,7 +13,6 @@ const Cell = ({
     setShipIdx,
     readyToPlay,
     playerShipLocations,
-    setPlayerShipLocations,
     setReadyToPlay,
 }) => {
     return (

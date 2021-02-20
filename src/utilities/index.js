@@ -30,6 +30,22 @@ export const ships = [
     },
 ];
 
+export const initialPlayerShipState = {
+    Carrier: [],
+    Battleship: [],
+    Cruiser: [],
+    Submarine: [],
+    Destroyer: [],
+};
+
+export const initialComputerShipState = {
+    Carrier: [],
+    Battleship: [],
+    Cruiser: [],
+    Submarine: [],
+    Destroyer: [],
+};
+
 export const buildBoard = () => {
     let newBoard = [];
 
@@ -143,7 +159,7 @@ export const generateComputerBoard = (dict) => {
         let copy;
 
         if (vertical) {
-            const diff = 10 - (row + shipLen);
+            let diff = 10 - (row + shipLen);
 
             if (diff < 0) row += diff;
             if (!checkIfVacant(row, col, shipLen, board, true)) continue;
@@ -157,7 +173,7 @@ export const generateComputerBoard = (dict) => {
             }
             dict[ships[shipIdx].name] = shipCoordinates;
         } else {
-            const diff = 10 - (col + shipLen);
+            let diff = 10 - (col + shipLen);
 
             if (diff < 0) col += diff;
             if (!checkIfVacant(row, col, shipLen, board, false)) continue;
@@ -220,13 +236,13 @@ export const detectSink = (row, col, dict, board) => {
     return false;
 };
 
-export const computersTurn = (playerBoard) => {
-    console.log(playerBoard);
+export const computersTurn = (playerBoard, prevMove, wasPrevMoveAHit) => {
     while (true) {
         let row = Math.floor(Math.random() * 10);
         let col = Math.floor(Math.random() * 10);
 
         if (playerBoard[row][col].clicked) continue;
+
         playerBoard[row][col].clicked = true;
         if (playerBoard[row][col] === 1) {
             playerBoard[row][col] = 2;

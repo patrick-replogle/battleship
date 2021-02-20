@@ -6,7 +6,7 @@ import Footer from './components/footer/Footer';
 import ComputerBoard from './components/ComputerBoard';
 import Controls from './components/controls/Controls';
 
-import { buildBoard } from './utilities';
+import { buildBoard, initialPlayerShipState, initialComputerShipState } from './utilities';
 
 const App = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -15,26 +15,16 @@ const App = () => {
     const [playerBoard, setPlayerBoard] = useState(buildBoard());
     const [playerWins, setPlayerWins] = useState(0);
     const [playerShipsLeft, setPlayerShipsLeft] = useState(5);
-    const [playerShipLocations, setPlayerShipLocations] = useState({
-        Carrier: [],
-        Battleship: [],
-        Cruiser: [],
-        Submarine: [],
-        Destroyer: [],
-    });
+    const [playerShipLocations, setPlayerShipLocations] = useState(initialPlayerShipState);
     const [shipIdx, setShipIdx] = useState(0);
     const [vertical, setVertical] = useState(false);
     const [readyToPlay, setReadyToPlay] = useState(false);
     const [computerShipsLeft, setComputerShipsLeft] = useState(5);
     const [computerWins, setComputerWins] = useState(0);
-    const [computerShipLocations, setComputerShipLocations] = useState({
-        Carrier: [],
-        Battleship: [],
-        Cruiser: [],
-        Submarine: [],
-        Destroyer: [],
-    });
+    const [computerShipLocations, setComputerShipLocations] = useState(initialComputerShipState);
     const [computerBoard, setComputerBoard] = useState(buildBoard());
+    const [prevComputerMove, setPrevComputerMove] = useState(null);
+    const [wasPrevMoveAHit, setWasPrevMoveAHit] = useState(false);
 
     const resetBoard = () => {
         setPlayerBoard(buildBoard());
@@ -45,20 +35,8 @@ const App = () => {
         setIsPlaying(false);
         setPlayerShipsLeft(5);
         setComputerShipsLeft(5);
-        setComputerShipLocations({
-            Carrier: [],
-            Battleship: [],
-            Cruiser: [],
-            Submarine: [],
-            Destroyer: [],
-        });
-        setComputerShipLocations({
-            Carrier: [],
-            Battleship: [],
-            Cruiser: [],
-            Submarine: [],
-            Destroyer: [],
-        });
+        setComputerShipLocations(initialComputerShipState);
+        setComputerShipLocations(initialPlayerShipState);
     };
     return (
         <>
@@ -75,8 +53,8 @@ const App = () => {
                         <h1>Computer Wins: {computerWins}</h1>
                     </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <PlayerBoard
                             isPlaying={isPlaying}
                             setIsPlaying={setIsPlaying}
@@ -114,6 +92,10 @@ const App = () => {
                             computerWins={computerWins}
                             setComputerWins={setComputerWins}
                             playerShipLocations={playerShipLocations}
+                            prevComputerMove={prevComputerMove}
+                            setPrevComputerMove={setPrevComputerMove}
+                            wasPrevMoveAHit={wasPrevMoveAHit}
+                            setWasPrevMoveAHit={setWasPrevMoveAHit}
                         />
                     </div>
                 </div>
