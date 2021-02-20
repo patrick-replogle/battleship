@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 
 import GlobalStyles from './components/global-styles';
 import PlayerBoard from './components/PlayerBoard';
-import PlayerMovesBoard from './components/PlayerMovesBoard';
 import Footer from './components/footer/Footer';
-import Computer from './components/Computer';
+import ComputerBoard from './components/ComputerBoard';
 
 const App = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -17,12 +16,13 @@ const App = () => {
     return (
         <>
             <GlobalStyles />
-            <h1>battleship</h1>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <PlayerBoard isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
-                {/* <PlayerMovesBoard /> */}
+            <h1 style={{ fontSize: '4rem' }}>Battleship</h1>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <PlayerBoard isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+                    <ComputerBoard playersTurn={playersTurn} setPlayersTurn={setPlayersTurn} />
+                </div>
             </div>
-            <Computer />
             <Footer />
         </>
     );

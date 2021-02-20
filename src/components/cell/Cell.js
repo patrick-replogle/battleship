@@ -2,15 +2,27 @@ import { placeShip, handleHover } from '../../utilities';
 
 import { StyledDiv } from './Cell.styles';
 
-const Cell = ({ col, i, j, board, selectedShip, vertical, setBoard, setSelectedShip, readyToPlay }) => {
+const Cell = ({
+    col,
+    i,
+    j,
+    board,
+    selectedShip,
+    vertical,
+    setBoard,
+    setSelectedShip,
+    readyToPlay,
+    playerShipLocations,
+    setPlayerShipLocations,
+}) => {
     return (
         <StyledDiv
             style={{
                 background:
                     col.hover && col.status === 1
-                        ? 'crimson'
+                        ? '#f44336'
                         : col.hover
-                        ? 'orange'
+                        ? '#ff9800'
                         : col.status === 0
                         ? '#006994'
                         : col.status === 1
@@ -18,7 +30,9 @@ const Cell = ({ col, i, j, board, selectedShip, vertical, setBoard, setSelectedS
                         : 'black',
             }}
             key={j}
-            onClick={() => placeShip(i, j, board, selectedShip, vertical, setBoard, setSelectedShip)}
+            onClick={() =>
+                placeShip(i, j, board, selectedShip, vertical, setBoard, setSelectedShip, playerShipLocations)
+            }
             onMouseEnter={() => handleHover(i, j, board, vertical, readyToPlay, selectedShip, setBoard)}
         >
             {col.status === 3 ? 'X' : ''}
