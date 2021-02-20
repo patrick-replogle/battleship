@@ -1,17 +1,34 @@
-import { colLabels, rowLabels, copyBoard } from '../utilities';
+import { colLabels, rowLabels, copyBoard, detectSink } from '../utilities';
 
 const ComputerBoard = ({
+    isPlaying,
+    setIsPlaying,
     playersTurn,
     setPlayersTurn,
     computerShipLocations,
     setComputerShipLocations,
     computerBoard,
     setComputerBoard,
+    computerShipsLeft,
+    setComputerShipsLeft,
+    resetBoard,
 }) => {
-    const handleClick = (e, row, col) => {
-        const copy = copyBoard(computerBoard);
-        copy[row][col].clicked = true;
-        setComputerBoard(copy);
+    const handleClick = (row, col) => {
+        if (isPlaying && playersTurn) {
+            const copy = copyBoard(computerBoard);
+            copy[row][col].clicked = true;
+
+            if (copy[row][col].status === 1) {
+                copy[row][col].status = 2;
+            }
+            if (detectSink(row, col, computerShipLocations, copy)) {
+                setComputerShipsLeft(computerShipsLeft - 1);
+                if (computerShipsLeft === 0) {
+                    alert('You win!');
+                }
+            }
+            setComputerBoard(copy);
+        }
     };
 
     return (
@@ -38,6 +55,8 @@ const ComputerBoard = ({
                             {row.map((col, j) => {
                                 return (
                                     <div
+                                        onClick={() => handleClick(i, j)}
+                                        key={j}
                                         style={{
                                             width: '40px',
                                             height: '40px',
@@ -47,12 +66,15 @@ const ComputerBoard = ({
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
-                                            color: col.status === 0 ? 'white' : col.status === 1 ? '#f44336' : 'black',
+                                            color:
+                                                col.status === 0
+                                                    ? 'white'
+                                                    : col.status >= 1 && col.alive
+                                                    ? '#f44336'
+                                                    : 'black',
                                         }}
-                                        key={j}
-                                        onClick={(e) => handleClick(e, i, j)}
                                     >
-                                        {col.clicked ? 'X' : ''}
+                                        {col.clicked && 'X'}
                                     </div>
                                 );
                             })}

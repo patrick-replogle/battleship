@@ -44,6 +44,7 @@ const PlayerBoard = ({
                     readyToPlay={readyToPlay}
                     playerShipLocations={playerShipLocations}
                     setPlayerShipLocations={setPlayerShipLocations}
+                    setReadyToPlay={setReadyToPlay}
                 />
             </div>
         </div>

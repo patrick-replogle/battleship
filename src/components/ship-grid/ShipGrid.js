@@ -9,6 +9,7 @@ const ShipGrid = ({
     readyToPlay,
     playerShipLocations,
     setPlayerShipLocations,
+    setReadyToPlay,
 }) => {
     return (
         <div>
@@ -30,6 +31,7 @@ const ShipGrid = ({
                                     key={j}
                                     playerShipLocations={playerShipLocations}
                                     setPlayerShipLocations={setPlayerShipLocations}
+                                    setReadyToPlay={setReadyToPlay}
                                 />
                             );
                         })}

@@ -14,6 +14,7 @@ const Cell = ({
     readyToPlay,
     playerShipLocations,
     setPlayerShipLocations,
+    setReadyToPlay,
 }) => {
     return (
         <StyledDiv
@@ -30,8 +31,13 @@ const Cell = ({
                         : 'black',
             }}
             key={j}
-            onClick={() => placeShip(i, j, board, shipIdx, vertical, setBoard, setShipIdx, playerShipLocations)}
-            onMouseEnter={() => handleHover(i, j, board, vertical, readyToPlay, shipIdx, setBoard)}
+            onClick={() => {
+                if (shipIdx < 5) placeShip(i, j, board, shipIdx, vertical, setBoard, setShipIdx, playerShipLocations);
+                if (shipIdx >= 4) setReadyToPlay(true);
+            }}
+            onMouseEnter={() => {
+                if (shipIdx < 5) handleHover(i, j, board, vertical, readyToPlay, shipIdx, setBoard);
+            }}
         >
             {col.status === 3 ? 'X' : ''}
         </StyledDiv>

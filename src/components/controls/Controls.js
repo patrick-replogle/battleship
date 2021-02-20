@@ -1,32 +1,49 @@
 import Button from '../other/Button';
 
-import { buildBoard, generateComputerBoard } from '../../utilities';
+import { generateComputerBoard } from '../../utilities';
 
 const Controls = ({
     playersTurn,
     setVertical,
-    setPlayerBoard,
-    setShipIdx,
     setIsPlaying,
     vertical,
-    shipIdx,
+    computerBoard,
     setComputerBoard,
     computerShipLocations,
+    readyToPlay,
+    isPlaying,
+    playerShipsLeft,
+    computerShipsLeft,
+    resetBoard,
 }) => {
-    const resetBoard = () => {
-        setPlayerBoard(buildBoard);
-        setShipIdx(0);
-        setIsPlaying();
-        setComputerBoard(generateComputerBoard(computerShipLocations));
-    };
     return (
         <div>
-            {playersTurn ? <h1>Your turn</h1> : <h1>Computer's Turn</h1>}
-            <Button onClick={() => setVertical(!vertical)}>Change Direction</Button>
+            {isPlaying && playersTurn ? (
+                <h1 style={{ fontSize: '2rem' }}>Your turn</h1>
+            ) : isPlaying && !playersTurn ? (
+                <h1 style={{ fontSize: '2rem' }}>Computer's Turn</h1>
+            ) : (
+                ''
+            )}
+            {isPlaying && (
+                <div style={{ display: 'flex', justifyContent: 'center', fontSize: '1rem' }}>
+                    <h1>{playerShipsLeft} Player Ships Left</h1>
+                    <h1 style={{ marginLeft: '3%' }}>{computerShipsLeft} Computer Ships Left</h1>
+                </div>
+            )}
+            {!readyToPlay && !isPlaying && <Button onClick={() => setVertical(!vertical)}>Change Direction</Button>}
+            {readyToPlay && !isPlaying && (
+                <Button
+                    onClick={() => {
+                        setIsPlaying(true);
+                        setComputerBoard(generateComputerBoard(computerShipLocations));
+                    }}
+                >
+                    Start
+                </Button>
+            )}
+
             <Button onClick={resetBoard}>Reset</Button>
-            <Button disabled={shipIdx < 5} onClick={() => setIsPlaying(true)}>
-                Start
-            </Button>
         </div>
     );
 };

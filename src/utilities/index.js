@@ -36,7 +36,7 @@ export const buildBoard = () => {
     for (let row = 0; row < 10; row++) {
         let row = [];
         for (let col = 0; col < 10; col++) {
-            row.push({ status: 0, hover: false, clicked: false });
+            row.push({ status: 0, hover: false, clicked: false, alive: true });
         }
         newBoard.push(row);
     }
@@ -46,12 +46,13 @@ export const buildBoard = () => {
 export const copyBoard = (currBoard) => {
     const newBoard = buildBoard();
 
-    currBoard.forEach((row, i) => {
-        row.forEach((col, j) => {
-            newBoard[i][j].status = currBoard[i][j].status;
-            newBoard[i][j].clicked = currBoard[i][j].clicked;
-        });
-    });
+    for (let row = 0; row < 10; row++) {
+        for (let col = 0; col < 10; col++) {
+            newBoard[row][col].status = currBoard[row][col].status;
+            newBoard[row][col].clicked = currBoard[row][col].clicked;
+            newBoard[row][col].alive = currBoard[row][col].alive;
+        }
+    }
     return newBoard;
 };
 
@@ -173,7 +174,6 @@ export const generateComputerBoard = (dict) => {
         board = copyBoard(copy);
         shipIdx++;
     }
-    //console.log(dict);
     return board;
 };
 
@@ -194,4 +194,27 @@ const checkIfVacant = (row, col, shipLen, board, vertical) => {
         }
     }
     return true;
+};
+
+export const detectSink = (row, col, dict, board) => {
+    for (let ship in dict) {
+        for (let [i, j] of dict[ship]) {
+            if (row === i && col === j) {
+                let flag = true;
+                for (let [x, y] of dict[ship]) {
+                    if (board[x][y].status !== 2) {
+                        flag = false; // only part of ship has been hit
+                        break;
+                    }
+                }
+                if (flag) {
+                    for (let [x, y] of dict[ship]) {
+                        board[x][y].alive = false; // ship has been sunk
+                    }
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 };
