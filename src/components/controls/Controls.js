@@ -1,6 +1,6 @@
 import Button from '../other/button/Button';
 
-import { computersTurn, generateComputerBoard } from '../../utilities';
+import { generateComputerBoard } from '../../utilities/functions';
 
 const Controls = ({
     playersTurn,

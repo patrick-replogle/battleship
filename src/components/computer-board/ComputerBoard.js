@@ -1,7 +1,7 @@
 import { RowLabels, ColLabels } from '../other/grid-labels/GridLabels';
 import { StyledGrid, StyledCell } from './ComputerBoard.styles';
 
-import { copyBoard, detectSink, computersTurn } from '../../utilities';
+import { copyBoard, detectSink, computersTurn } from '../../utilities/functions';
 
 const ComputerBoard = (props) => {
     const handlePlayerTurn = (row, col) => {
@@ -36,7 +36,7 @@ const ComputerBoard = (props) => {
 
     const handleComputerTurn = () => {
         const playerCopy = copyBoard(props.playerBoard);
-        const [x, y] = computersTurn(playerCopy, props.prevComputerMove);
+        const [x, y] = computersTurn(playerCopy, props.prevComputerHit);
 
         if (playerCopy[x][y].status === 1) {
             playerCopy[x][y].status = 2;

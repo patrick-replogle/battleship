@@ -1,6 +1,6 @@
 import { StyledGrid, StyledCell } from './PlayerBoard.styles';
 import { RowLabels, ColLabels } from '../other/grid-labels/GridLabels';
-import { placeShip, handleHover } from '../../utilities';
+import { placeShip, handleHover } from '../../utilities/functions';
 
 const PlayerBoard = ({
     playerBoard,

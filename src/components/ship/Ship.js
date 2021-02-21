@@ -1,4 +1,4 @@
-import { ships } from '../../utilities';
+import { ships } from '../../utilities/data';
 import { Container, StyledDiv, Cell, StyledP } from './Ship.styles';
 
 const Ship = ({ shipIdx }) => {

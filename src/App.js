@@ -7,7 +7,8 @@ import ComputerBoard from './components/computer-board/ComputerBoard';
 import Controls from './components/controls/Controls';
 import Score from './components/score/Score';
 
-import { buildBoard, initialPlayerShipState, initialComputerShipState } from './utilities';
+import { buildBoard } from './utilities/functions';
+import { initialPlayerShipState, initialComputerShipState } from './utilities/data';
 
 const App = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -24,7 +25,7 @@ const App = () => {
     const [computerWins, setComputerWins] = useState(0);
     const [computerShipLocations, setComputerShipLocations] = useState(initialComputerShipState);
     const [computerBoard, setComputerBoard] = useState(buildBoard());
-    const [prevComputerMove, setPrevComputerMove] = useState(null);
+    const [prevComputerHit, setPrevComputerHit] = useState(null);
 
     const resetBoard = () => {
         setPlayerBoard(buildBoard());
@@ -88,8 +89,8 @@ const App = () => {
                             computerWins={computerWins}
                             setComputerWins={setComputerWins}
                             playerShipLocations={playerShipLocations}
-                            prevComputerMove={prevComputerMove}
-                            setPrevComputerMove={setPrevComputerMove}
+                            prevComputerHit={prevComputerHit}
+                            setPrevComputerHit={setPrevComputerHit}
                         />
                     </div>
                 </div>
