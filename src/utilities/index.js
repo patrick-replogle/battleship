@@ -52,6 +52,7 @@ export const buildBoard = () => {
     for (let row = 0; row < 10; row++) {
         let row = [];
         for (let col = 0; col < 10; col++) {
+            // status: 0 = 'ocean', '1' = 'ship', '2' = 'hit'
             row.push({ status: 0, hover: false, clicked: false, alive: true });
         }
         newBoard.push(row);

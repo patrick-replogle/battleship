@@ -5,6 +5,7 @@ import PlayerBoard from './components/player-board/PlayerBoard';
 import Footer from './components/other/footer/Footer';
 import ComputerBoard from './components/computer-board/ComputerBoard';
 import Controls from './components/controls/Controls';
+import Score from './components/score/Score';
 
 import { buildBoard, initialPlayerShipState, initialComputerShipState } from './utilities';
 
@@ -41,17 +42,12 @@ const App = () => {
         <>
             <GlobalStyles />
             <div>
-                <h1 style={{ fontSize: '3rem' }}>BATTLESHIP</h1>
-                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'left', fontSize: '1rem' }}>
-                    <div>
-                        <h1>Player Ships: {playerShipsLeft}</h1>
-                        <h1>Player Wins: {playerWins}</h1>
-                    </div>
-                    <div>
-                        <h1>Computer Ships: {computerShipsLeft}</h1>
-                        <h1>Computer Wins: {computerWins}</h1>
-                    </div>
-                </div>
+                <Score
+                    playerWins={playerWins}
+                    computerWins={computerWins}
+                    playerShipsLeft={playerShipsLeft}
+                    computerShipsLeft={computerShipsLeft}
+                />
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <PlayerBoard
