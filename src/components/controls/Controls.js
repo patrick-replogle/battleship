@@ -1,4 +1,4 @@
-import Button from '../other/Button';
+import Button from '../other/button/Button';
 
 import { computersTurn, generateComputerBoard } from '../../utilities';
 

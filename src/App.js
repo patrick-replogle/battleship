@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import GlobalStyles from './components/global-styles';
 import PlayerBoard from './components/player-board/PlayerBoard';
-import Footer from './components/footer/Footer';
+import Footer from './components/other/footer/Footer';
 import ComputerBoard from './components/computer-board/ComputerBoard';
 import Controls from './components/controls/Controls';
 
@@ -24,7 +24,6 @@ const App = () => {
     const [computerShipLocations, setComputerShipLocations] = useState(initialComputerShipState);
     const [computerBoard, setComputerBoard] = useState(buildBoard());
     const [prevComputerMove, setPrevComputerMove] = useState(null);
-    const [wasPrevMoveAHit, setWasPrevMoveAHit] = useState(false);
 
     const resetBoard = () => {
         setPlayerBoard(buildBoard());
@@ -95,8 +94,6 @@ const App = () => {
                             playerShipLocations={playerShipLocations}
                             prevComputerMove={prevComputerMove}
                             setPrevComputerMove={setPrevComputerMove}
-                            wasPrevMoveAHit={wasPrevMoveAHit}
-                            setWasPrevMoveAHit={setWasPrevMoveAHit}
                         />
                     </div>
                 </div>

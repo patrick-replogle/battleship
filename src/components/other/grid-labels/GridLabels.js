@@ -1,6 +1,6 @@
 import { StyledRowLabelContainer, StyledColLabelContainer } from './GridLabel.styles';
 
-import { rowLabels, colLabels } from '../../utilities';
+import { rowLabels, colLabels } from '../../../utilities';
 
 export const RowLabels = () => {
     return (

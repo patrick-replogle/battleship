@@ -236,8 +236,10 @@ export const detectSink = (row, col, dict, board) => {
     return false;
 };
 
-export const computersTurn = (playerBoard, prevMove, wasPrevMoveAHit) => {
+export const computersTurn = (playerBoard, prevMove) => {
     while (true) {
+        // if (!prevMove || !playerBoard[prevMove[0]][prevMove[1]].alive) {
+        // }
         let row = Math.floor(Math.random() * 10);
         let col = Math.floor(Math.random() * 10);
 
