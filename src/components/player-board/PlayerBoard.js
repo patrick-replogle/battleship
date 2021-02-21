@@ -1,23 +1,65 @@
-import ShipGrid from '../ship-grid/ShipGrid';
+import { StyledGrid, StyledCell } from './PlayerBoard.styles';
 import { RowLabels, ColLabels } from '../grid-labels/GridLabels';
+import { placeShip, handleHover } from '../../utilities';
 
-const PlayerBoard = (props) => {
+const PlayerBoard = ({
+    playerBoard,
+    setPlayerBoard,
+    vertical,
+    shipIdx,
+    setShipIdx,
+    readyToPlay,
+    playerShipLocations,
+    setReadyToPlay,
+}) => {
     return (
         <div>
             <ColLabels />
             <div style={{ display: 'flex' }}>
                 <RowLabels />
-                <ShipGrid
-                    board={props.playerBoard}
-                    setBoard={props.setPlayerBoard}
-                    vertical={props.vertical}
-                    shipIdx={props.shipIdx}
-                    setShipIdx={props.setShipIdx}
-                    readyToPlay={props.readyToPlay}
-                    playerShipLocations={props.playerShipLocations}
-                    setPlayerShipLocations={props.setPlayerShipLocations}
-                    setReadyToPlay={props.setReadyToPlay}
-                />
+                <div>
+                    {playerBoard.map((row, i) => {
+                        return (
+                            <StyledGrid key={i}>
+                                {row.map((cell, j) => {
+                                    return (
+                                        <StyledCell
+                                            cell={cell}
+                                            onClick={() => {
+                                                if (shipIdx < 5)
+                                                    placeShip(
+                                                        i,
+                                                        j,
+                                                        playerBoard,
+                                                        shipIdx,
+                                                        vertical,
+                                                        setPlayerBoard,
+                                                        setShipIdx,
+                                                        playerShipLocations,
+                                                    );
+                                                if (shipIdx >= 4) setReadyToPlay(true);
+                                            }}
+                                            onMouseEnter={() => {
+                                                if (shipIdx < 5)
+                                                    handleHover(
+                                                        i,
+                                                        j,
+                                                        playerBoard,
+                                                        vertical,
+                                                        readyToPlay,
+                                                        shipIdx,
+                                                        setPlayerBoard,
+                                                    );
+                                            }}
+                                        >
+                                            {cell.clicked && 'X'}
+                                        </StyledCell>
+                                    );
+                                })}
+                            </StyledGrid>
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );
