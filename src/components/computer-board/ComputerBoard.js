@@ -1,6 +1,7 @@
-import { RowLabels, ColLabels } from './grid-labels/GridLabels';
+import { RowLabels, ColLabels } from '../grid-labels/GridLabels';
+import { StyledGrid, StyledCell } from './ComputerBoard.styles';
 
-import { copyBoard, detectSink, computersTurn } from '../utilities';
+import { copyBoard, detectSink, computersTurn } from '../../utilities';
 
 const ComputerBoard = (props) => {
     const handlePlayerTurn = (row, col) => {
@@ -59,34 +60,15 @@ const ComputerBoard = (props) => {
 
                 {props.computerBoard.map((row, i) => {
                     return (
-                        <div style={{ display: 'flex', flexDirection: 'column' }} key={i}>
-                            {row.map((col, j) => {
+                        <StyledGrid key={i}>
+                            {row.map((cell, j) => {
                                 return (
-                                    <div
-                                        onClick={() => handlePlayerTurn(i, j)}
-                                        key={j}
-                                        style={{
-                                            width: '40px',
-                                            height: '40px',
-                                            border: '1px solid white',
-                                            background: '#006994',
-                                            fontSize: '4rem',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            color:
-                                                col.status === 0
-                                                    ? 'white'
-                                                    : col.status >= 1 && col.alive
-                                                    ? '#f44336'
-                                                    : 'black',
-                                        }}
-                                    >
-                                        {col.clicked && 'X'}
-                                    </div>
+                                    <StyledCell cell={cell} onClick={() => handlePlayerTurn(i, j)} key={j}>
+                                        {cell.clicked && 'X'}
+                                    </StyledCell>
                                 );
                             })}
-                        </div>
+                        </StyledGrid>
                     );
                 })}
             </div>

@@ -30,7 +30,6 @@ const Cell = ({
                         ? '#848482'
                         : '',
             }}
-            key={j}
             onClick={() => {
                 if (shipIdx < 5) placeShip(i, j, board, shipIdx, vertical, setBoard, setShipIdx, playerShipLocations);
                 if (shipIdx >= 4) setReadyToPlay(true);

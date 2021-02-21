@@ -1,5 +1,5 @@
-import ShipGrid from './ship-grid/ShipGrid';
-import { RowLabels, ColLabels } from './grid-labels/GridLabels';
+import ShipGrid from '../ship-grid/ShipGrid';
+import { RowLabels, ColLabels } from '../grid-labels/GridLabels';
 
 const PlayerBoard = (props) => {
     return (

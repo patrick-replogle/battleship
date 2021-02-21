@@ -1,6 +1,6 @@
 import Button from '../other/Button';
 
-import { generateComputerBoard } from '../../utilities';
+import { computersTurn, generateComputerBoard } from '../../utilities';
 
 const Controls = ({
     playersTurn,
@@ -28,7 +28,7 @@ const Controls = ({
                         setComputerBoard(generateComputerBoard(computerShipLocations));
                     }}
                 >
-                    Start
+                    {playerWins > 0 || computerWins > 0 ? 'Play Again' : 'Start'}
                 </Button>
             )}
             <Button onClick={resetBoard}>Reset</Button>

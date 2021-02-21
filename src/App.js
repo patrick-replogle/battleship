@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import GlobalStyles from './components/global-styles';
-import PlayerBoard from './components/PlayerBoard';
+import PlayerBoard from './components/player-board/PlayerBoard';
 import Footer from './components/footer/Footer';
-import ComputerBoard from './components/ComputerBoard';
+import ComputerBoard from './components/computer-board/ComputerBoard';
 import Controls from './components/controls/Controls';
 
 import { buildBoard, initialPlayerShipState, initialComputerShipState } from './utilities';
@@ -71,6 +71,7 @@ const App = () => {
                             playerShipLocations={playerShipLocations}
                             setPlayerShipLocations={setPlayerShipLocations}
                             setReadyToPlay={setReadyToPlay}
+                            readyToPlay={readyToPlay}
                         />
                         <ComputerBoard
                             isPlaying={isPlaying}
