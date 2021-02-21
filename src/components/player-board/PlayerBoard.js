@@ -24,6 +24,7 @@ const PlayerBoard = ({
                                 {row.map((cell, j) => {
                                     return (
                                         <StyledCell
+                                            key={j}
                                             cell={cell}
                                             onClick={() => {
                                                 if (shipIdx < 5)

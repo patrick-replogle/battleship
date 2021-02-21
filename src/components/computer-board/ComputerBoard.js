@@ -35,11 +35,13 @@ const ComputerBoard = (props) => {
     };
 
     const handleComputerTurn = () => {
+        console.log(props.prevComputerHit);
         const playerCopy = copyBoard(props.playerBoard);
         const [x, y] = computersTurn(playerCopy, props.prevComputerHit);
 
-        if (playerCopy[x][y].status === 1) {
+        if (playerCopy[x][y].status === 2) {
             playerCopy[x][y].status = 2;
+            props.setPrevComputerHit([x, y]);
             if (detectSink(x, y, props.playerShipLocations, playerCopy)) {
                 props.setPlayerShipsLeft(props.playerShipsLeft - 1);
                 if (props.playerShipsLeft - 1 === 0) {
@@ -48,6 +50,7 @@ const ComputerBoard = (props) => {
                 }
             }
         }
+
         props.setPlayerBoard(playerCopy);
         props.setPlayersTurn(true);
     };

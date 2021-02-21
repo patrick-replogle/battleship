@@ -50,7 +50,7 @@ const App = () => {
                     computerShipsLeft={computerShipsLeft}
                 />
                 <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-evenly', marginTop: '15px' }}>
                         <PlayerBoard
                             isPlaying={isPlaying}
                             setIsPlaying={setIsPlaying}

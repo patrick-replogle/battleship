@@ -3,17 +3,13 @@ import Button from '../other/button/Button';
 import { generateComputerBoard } from '../../utilities/functions';
 
 const Controls = ({
-    playersTurn,
     setVertical,
     setIsPlaying,
     vertical,
-    computerBoard,
     setComputerBoard,
     computerShipLocations,
     readyToPlay,
     isPlaying,
-    playerShipsLeft,
-    computerShipsLeft,
     resetBoard,
     playerWins,
     computerWins,

@@ -181,7 +181,6 @@ export const detectSink = (row, col, dict, board) => {
                 if (flag) {
                     for (let [x, y] of dict[ship]) {
                         board[x][y].alive = false; // ship has been sunk
-                        console.log([x, y]);
                     }
                     return true;
                 }
@@ -193,17 +192,69 @@ export const detectSink = (row, col, dict, board) => {
 
 export const computersTurn = (playerBoard, prevMove) => {
     while (true) {
-        // if (!prevMove || !playerBoard[prevMove[0]][prevMove[1]].alive) {
-        // }
-        let row = Math.floor(Math.random() * 10);
-        let col = Math.floor(Math.random() * 10);
+        if (!prevMove || !playerBoard[prevMove[0]][prevMove[1]].alive) {
+            let row = Math.floor(Math.random() * 10);
+            let col = Math.floor(Math.random() * 10);
 
-        if (playerBoard[row][col].clicked) continue;
+            if (playerBoard[row][col].clicked) continue;
 
-        playerBoard[row][col].clicked = true;
-        if (playerBoard[row][col] === 1) {
-            playerBoard[row][col] = 2;
+            playerBoard[row][col].clicked = true;
+            if (playerBoard[row][col].status === 1) {
+                playerBoard[row][col].status = 2;
+            }
+            return [row, col];
+        } else {
+            let nextMoves = getValidMoves(playerBoard, prevMove[0], prevMove[1]);
+            if (!nextMoves.length) {
+                for (let i = 0; i < playerBoard.length; i++) {
+                    for (let j = 0; j < playerBoard[0].length; j++) {
+                        if (playerBoard[i][j].clicked && playerBoard[i][j].status === 2 && playerBoard[i][j].alive) {
+                            nextMoves = getValidMoves(playerBoard, i, j);
+                            if (!nextMoves.length) {
+                                prevMove = null;
+                                continue;
+                            }
+                            let [row, col] = nextMoves[0];
+                            playerBoard[row][col].clicked = true;
+                            if (playerBoard[row][col].status === 1) {
+                                playerBoard[row][col].status = 2;
+                            }
+                            return [row, col];
+                        }
+                    }
+                }
+                continue;
+            }
+            let [row, col] = nextMoves[0];
+            playerBoard[row][col].clicked = true;
+            if (playerBoard[row][col].status === 1) {
+                playerBoard[row][col].status = 2;
+            }
+            return [row, col];
         }
-        return [row, col];
     }
+};
+
+const getValidMoves = (playerBoard, row, col) => {
+    let neighbors = [];
+    let moves = [
+        [-1, -1], // NW
+        [-1, 1], // NE
+        [1, -1], // SW
+        [1, 1], // SE
+        [1, 0], // S
+        [-1, 0], // N
+        [0, -1], // E
+        [0, 1], // W
+    ];
+
+    function recurse(i, j) {
+        if (i < 0 || i >= playerBoard.length || j < 0 || j >= playerBoard[0].length) return;
+        if (playerBoard[i][j].status !== 1 || !playerBoard[i][j].alive) return;
+        neighbors.push([i, j]);
+    }
+
+    moves.forEach((move) => recurse(row + move[0], col + move[1]));
+
+    return neighbors;
 };
