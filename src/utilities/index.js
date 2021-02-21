@@ -52,6 +52,7 @@ export const buildBoard = () => {
     for (let row = 0; row < 10; row++) {
         let row = [];
         for (let col = 0; col < 10; col++) {
+            // status: 0 = 'ocean', '1' = 'ship', '2' = 'hit'
             row.push({ status: 0, hover: false, clicked: false, alive: true });
         }
         newBoard.push(row);
@@ -236,8 +237,10 @@ export const detectSink = (row, col, dict, board) => {
     return false;
 };
 
-export const computersTurn = (playerBoard, prevMove, wasPrevMoveAHit) => {
+export const computersTurn = (playerBoard, prevMove) => {
     while (true) {
+        // if (!prevMove || !playerBoard[prevMove[0]][prevMove[1]].alive) {
+        // }
         let row = Math.floor(Math.random() * 10);
         let col = Math.floor(Math.random() * 10);
 
