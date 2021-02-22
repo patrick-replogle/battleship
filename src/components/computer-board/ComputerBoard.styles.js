@@ -14,5 +14,10 @@ export const StyledCell = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${({ cell }) => (cell.status === 0 ? 'white' : cell.status >= 1 && cell.alive ? '#f44336' : 'black')};
+    color: ${({ cell }) =>
+        cell.status === 'ocean'
+            ? 'white'
+            : (cell.status === 'ship' || cell.status === 'hit') && cell.alive
+            ? '#f44336'
+            : 'black'};
 `;
