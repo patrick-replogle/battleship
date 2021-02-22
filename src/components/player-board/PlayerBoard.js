@@ -1,6 +1,6 @@
 import { StyledGrid, StyledCell } from './PlayerBoard.styles';
 import { RowLabels, ColLabels } from '../other/grid-labels/GridLabels';
-import { placeShip, handleHover } from '../../utilities';
+import { placeShip, handleHover } from '../../utilities/functions';
 
 const PlayerBoard = ({
     playerBoard,
@@ -24,6 +24,7 @@ const PlayerBoard = ({
                                 {row.map((cell, j) => {
                                     return (
                                         <StyledCell
+                                            key={j}
                                             cell={cell}
                                             onClick={() => {
                                                 if (shipIdx < 5)

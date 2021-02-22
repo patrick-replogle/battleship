@@ -17,9 +17,9 @@ const Score = ({ playerShipsLeft, playerWins, computerShipsLeft, computerWins })
                     </div>
                 </StyledScoreContainer>
                 <StyledTitleContainer>
-                    <Icon icon={mineIcon} style={{ fontSize: '6rem', color: '#f44336' }} />
-                    <h1 style={{ fontSize: '3rem' }}>BATTLESHIP</h1>
-                    <Icon icon={mineIcon} style={{ fontSize: '6rem', color: '#f44336' }} />
+                    <Icon icon={mineIcon} style={{ fontSize: '7rem', color: '#f44336' }} />
+                    <h1 style={{ fontSize: '3rem', margin: '0 5%' }}>BATTLESHIP</h1>
+                    <Icon icon={mineIcon} style={{ fontSize: '7rem', color: '#f44336' }} />
                 </StyledTitleContainer>
                 <StyledScoreContainer direction="flex-end">
                     <Icon icon={classicComputer} style={{ fontSize: '7rem' }} />
