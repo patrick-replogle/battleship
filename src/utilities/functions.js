@@ -197,7 +197,7 @@ export const generateMove = (playerBoard) => {
                 playerBoard[row][col].status === 'hit' &&
                 playerBoard[row][col].alive
             ) {
-                let nextMoves = getValidMoves(playerBoard, row, col);
+                let nextMoves = getValidMoves(playerBoard, row, col); // there is an active ship that has been struck so run dfs to determine a next move
                 if (nextMoves.length) {
                     let [x, y] = nextMoves.pop();
                     playerBoard[x][y].clicked = true;
@@ -207,7 +207,7 @@ export const generateMove = (playerBoard) => {
             }
         }
     }
-    return generateRandomMove(playerBoard);
+    return generateRandomMove(playerBoard); // no active ships are hit so choose at random
 };
 
 const generateRandomMove = (playerBoard) => {
@@ -228,14 +228,10 @@ const generateRandomMove = (playerBoard) => {
 const getValidMoves = (playerBoard, row, col) => {
     let neighbors = [];
     let moves = [
-        [1, 1], // SE
-        [1, 0], // S
-        [-1, 0], // N
-        [0, -1], // E
-        [0, 1], // W
-        [-1, -1], // NW
-        [-1, 1], // NE
-        [1, -1], // SW
+        [-1, 0], // North
+        [0, -1], // West
+        [1, 0], // South
+        [0, 1], // East
     ];
 
     function DFS(i, j) {
@@ -244,5 +240,6 @@ const getValidMoves = (playerBoard, row, col) => {
         neighbors.push([i, j]); // found a potential nextMove
     }
     moves.forEach((move) => DFS(row + move[0], col + move[1]));
-    return neighbors; // return array of potential nextMoves
+
+    return neighbors;
 };
