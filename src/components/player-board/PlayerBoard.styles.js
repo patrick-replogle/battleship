@@ -13,16 +13,27 @@ export const StyledCell = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${({ cell }) =>
-        cell.status === 'ocean' ? 'white' : cell.status === 'hit' && cell.alive ? '#f44336' : 'black'};
-    background: ${({ cell }) =>
-        cell.hover && cell.status === 'ship'
-            ? '#f44336'
-            : cell.hover
-            ? '#ffea00'
-            : cell.status === 'ocean'
-            ? '#006994'
-            : cell.status === 'ship' || cell.status === 'hit'
-            ? '#848482'
-            : ''};
+    color: ${({ cell }) => pickFontColor(cell)};
+    background: ${({ cell }) => pickBackgroundColor(cell)};
 `;
+
+const pickFontColor = (cell) => {
+    if (cell.status === 'ocean') {
+        return 'white';
+    } else if (cell.status === 'hit' && cell.alive) {
+        return '#f44336';
+    }
+    return 'black';
+};
+
+const pickBackgroundColor = (cell) => {
+    if (cell.hover && cell.status === 'ship') {
+        return '#f44336';
+    } else if (cell.hover) {
+        return '#ffea00';
+    } else if (cell.status === 'ocean') {
+        return '#006994';
+    } else if (cell.status === 'ship' || cell.status === 'hit') {
+        return '#848482';
+    }
+};
