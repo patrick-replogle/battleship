@@ -14,10 +14,14 @@ export const StyledCell = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${({ cell }) =>
-        cell.status === 'ocean'
-            ? 'white'
-            : (cell.status === 'ship' || cell.status === 'hit') && cell.alive
-            ? '#f44336'
-            : 'black'};
+    color: ${({ cell }) => pickFontColor(cell)};
 `;
+
+const pickFontColor = (cell) => {
+    if (cell.status === 'ocean') {
+        return 'white';
+    } else if (cell.status === 'hit' && cell.alive) {
+        return '#f44336';
+    }
+    return 'black';
+};
