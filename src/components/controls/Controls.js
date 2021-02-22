@@ -11,23 +11,31 @@ const Controls = ({
     readyToPlay,
     isPlaying,
     resetBoard,
-    playerWins,
-    computerWins,
+    gameover,
+    playerShipsLeft,
 }) => {
     return (
         <div style={{ marginTop: '15px' }}>
-            {!readyToPlay && !isPlaying && <Button onClick={() => setVertical(!vertical)}>Change Direction</Button>}
-            {readyToPlay && !isPlaying && (
+            {!gameover && !readyToPlay && !isPlaying && (
+                <Button onClick={() => setVertical(!vertical)}>Change Direction</Button>
+            )}
+            {!gameover && readyToPlay && !isPlaying && (
                 <Button
                     onClick={() => {
                         setIsPlaying(true);
                         setComputerBoard(generateComputerBoard(computerShipLocations));
                     }}
                 >
-                    {playerWins > 0 || computerWins > 0 ? 'Play Again' : 'Start'}
+                    Start
                 </Button>
             )}
-            <Button onClick={resetBoard}>Reset</Button>
+            {!gameover && <Button onClick={resetBoard}>Reset</Button>}
+            {gameover && (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Button onClick={resetBoard}>Play Again?</Button>
+                    <h2 style={{ fontSize: '3rem' }}>{playerShipsLeft > 0 ? 'You Won!' : 'You Lost!'}</h2>
+                </div>
+            )}
         </div>
     );
 };
