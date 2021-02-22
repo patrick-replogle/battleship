@@ -9,8 +9,8 @@ const ComputerBoard = (props) => {
             const copy = copyBoard(props.computerBoard);
             copy[row][col].clicked = true;
 
-            if (copy[row][col].status === 1) {
-                copy[row][col].status = 2;
+            if (copy[row][col].status === 'ship') {
+                copy[row][col].status = 'hit';
                 if (detectSink(row, col, props.computerShipLocations, copy)) {
                     let nextState = props.computerShipsLeft - 1;
                     props.setComputerShipsLeft(nextState);
@@ -33,7 +33,7 @@ const ComputerBoard = (props) => {
         const playerCopy = copyBoard(props.playerBoard);
         const [x, y] = generateMove(playerCopy);
 
-        if (playerCopy[x][y].status === 2) {
+        if (playerCopy[x][y].status === 'hit') {
             if (detectSink(x, y, props.playerShipLocations, playerCopy)) {
                 let nextState = props.playerShipsLeft - 1;
                 props.setPlayerShipsLeft(nextState);
