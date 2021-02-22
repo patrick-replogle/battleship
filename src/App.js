@@ -2,24 +2,23 @@ import React, { useState } from 'react';
 
 import GlobalStyles from './components/global-styles';
 import PlayerBoard from './components/player-board/PlayerBoard';
-import Footer from './components/other/footer/Footer';
+import Footer from './components/footer/Footer';
 import ComputerBoard from './components/computer-board/ComputerBoard';
 import Controls from './components/controls/Controls';
 import Score from './components/score/Score';
 
-import { buildBoard } from './utilities/functions';
-import { initialPlayerShipState, initialComputerShipState } from './utilities/data';
+import { buildBoard, initialShipState } from './utilities/functions';
 
 const App = () => {
     // player state
     const [playerBoard, setPlayerBoard] = useState(buildBoard());
     const [playerWins, setPlayerWins] = useState(0);
     const [playerShipsLeft, setPlayerShipsLeft] = useState(5);
-    const [playerShipLocations, setPlayerShipLocations] = useState(initialPlayerShipState());
+    const [playerShipLocations, setPlayerShipLocations] = useState(initialShipState());
     // computer state
     const [computerShipsLeft, setComputerShipsLeft] = useState(5);
     const [computerWins, setComputerWins] = useState(0);
-    const [computerShipLocations, setComputerShipLocations] = useState(initialComputerShipState());
+    const [computerShipLocations, setComputerShipLocations] = useState(initialShipState());
     const [computerBoard, setComputerBoard] = useState(buildBoard());
     // game state
     const [playersTurn, setPlayersTurn] = useState(true);
@@ -29,20 +28,6 @@ const App = () => {
     const [vertical, setVertical] = useState(false);
     const [readyToPlay, setReadyToPlay] = useState(false);
 
-    const resetBoard = () => {
-        setPlayerBoard(buildBoard());
-        setShipIdx(0);
-        setIsPlaying(false);
-        setPlayersTurn(true);
-        setComputerBoard(buildBoard());
-        setReadyToPlay(false);
-        setIsPlaying(false);
-        setPlayerShipsLeft(5);
-        setComputerShipsLeft(5);
-        setComputerShipLocations(initialComputerShipState());
-        setPlayerShipLocations(initialPlayerShipState());
-        setGameover(false);
-    };
     return (
         <>
             <GlobalStyles />
@@ -56,18 +41,12 @@ const App = () => {
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'space-evenly', marginTop: '15px' }}>
                         <PlayerBoard
-                            isPlaying={isPlaying}
-                            setIsPlaying={setIsPlaying}
                             playerBoard={playerBoard}
                             setPlayerBoard={setPlayerBoard}
                             vertical={vertical}
-                            setVertical={setVertical}
                             shipIdx={shipIdx}
                             setShipIdx={setShipIdx}
-                            playerShipsLeft={playerShipsLeft}
-                            setPlayerShipsLeft={setPlayerShipsLeft}
                             playerShipLocations={playerShipLocations}
-                            setPlayerShipLocations={setPlayerShipLocations}
                             setReadyToPlay={setReadyToPlay}
                             readyToPlay={readyToPlay}
                         />
@@ -103,9 +82,17 @@ const App = () => {
                     setComputerBoard={setComputerBoard}
                     readyToPlay={readyToPlay}
                     computerShipLocations={computerShipLocations}
-                    resetBoard={resetBoard}
                     gameover={gameover}
                     playerShipsLeft={playerShipsLeft}
+                    setPlayerBoard={setPlayerBoard}
+                    setShipIdx={setShipIdx}
+                    setPlayersTurn={setPlayersTurn}
+                    setReadyToPlay={setReadyToPlay}
+                    setPlayerShipsLeft={setPlayerShipsLeft}
+                    setComputerShipsLeft={setComputerShipsLeft}
+                    setComputerShipLocations={setComputerShipLocations}
+                    setPlayerShipLocations={setPlayerShipLocations}
+                    setGameover={setGameover}
                 />
             </div>
             <Footer />

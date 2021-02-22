@@ -1,5 +1,5 @@
 import { StyledGrid, StyledCell } from './PlayerBoard.styles';
-import { RowLabels, ColLabels } from '../other/grid-labels/GridLabels';
+import { RowLabels, ColLabels } from '../grid-labels/GridLabels';
 import { placeShip, handleHover } from '../../utilities/functions';
 
 const PlayerBoard = ({
@@ -12,6 +12,15 @@ const PlayerBoard = ({
     playerShipLocations,
     setReadyToPlay,
 }) => {
+    const handleShipPlacement = (row, col) => {
+        if (shipIdx < 5) {
+            setPlayerBoard(placeShip(row, col, playerBoard, shipIdx, vertical, playerShipLocations));
+            const nextState = shipIdx + 1;
+            setShipIdx(nextState);
+            if (shipIdx >= 4) setReadyToPlay(true);
+        }
+    };
+
     return (
         <div>
             <ColLabels />
@@ -26,31 +35,13 @@ const PlayerBoard = ({
                                         <StyledCell
                                             key={j}
                                             cell={cell}
-                                            onClick={() => {
-                                                if (shipIdx < 5)
-                                                    placeShip(
-                                                        i,
-                                                        j,
-                                                        playerBoard,
-                                                        shipIdx,
-                                                        vertical,
-                                                        setPlayerBoard,
-                                                        setShipIdx,
-                                                        playerShipLocations,
-                                                    );
-                                                if (shipIdx >= 4) setReadyToPlay(true);
-                                            }}
+                                            onClick={() => handleShipPlacement(i, j)}
                                             onMouseEnter={() => {
-                                                if (shipIdx < 5)
-                                                    handleHover(
-                                                        i,
-                                                        j,
-                                                        playerBoard,
-                                                        vertical,
-                                                        readyToPlay,
-                                                        shipIdx,
-                                                        setPlayerBoard,
+                                                if (shipIdx < 5) {
+                                                    setPlayerBoard(
+                                                        handleHover(i, j, playerBoard, vertical, readyToPlay, shipIdx),
                                                     );
+                                                }
                                             }}
                                         >
                                             {cell.clicked && 'X'}

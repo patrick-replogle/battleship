@@ -1,5 +1,34 @@
 import { ships } from './data';
 
+export const initialShipState = () => ({
+    Carrier: [],
+    Battleship: [],
+    Cruiser: [],
+    Submarine: [],
+    Destroyer: [],
+});
+
+export const pickFontColor = (cell) => {
+    if (cell.status === 'ocean') {
+        return 'white';
+    } else if (cell.status === 'hit' && cell.alive) {
+        return '#f44336';
+    }
+    return 'black';
+};
+
+export const pickBackgroundColor = (cell) => {
+    if (cell.hover && cell.status === 'ship') {
+        return '#f44336';
+    } else if (cell.hover) {
+        return '#ffea00';
+    } else if (cell.status === 'ocean') {
+        return '#006994';
+    } else if (cell.status === 'ship' || cell.status === 'hit') {
+        return '#848482';
+    }
+};
+
 export const buildBoard = () => {
     let newBoard = [];
 
@@ -41,7 +70,7 @@ export const isSpaceOccupied = (row, col, shipLen, vertical, board) => {
     return false;
 };
 
-export const placeShip = (row, col, board, shipIdx, vertical, cb1, cb2, dict) => {
+export const placeShip = (row, col, board, shipIdx, vertical, dict) => {
     if (shipIdx < ships.length) {
         const newBoard = copyBoard(board);
         const shipLen = ships[shipIdx].length;
@@ -69,12 +98,11 @@ export const placeShip = (row, col, board, shipIdx, vertical, cb1, cb2, dict) =>
                 row++;
             }
         }
-        cb1(newBoard);
-        cb2(shipIdx + 1);
+        return newBoard;
     }
 };
 
-export const handleHover = (row, col, board, vertical, readyToPlay, shipIdx, cb) => {
+export const handleHover = (row, col, board, vertical, readyToPlay, shipIdx) => {
     if (!readyToPlay && shipIdx < ships.length) {
         const shipLen = ships[shipIdx].length;
         const newBoard = copyBoard(board);
@@ -96,7 +124,7 @@ export const handleHover = (row, col, board, vertical, readyToPlay, shipIdx, cb)
                 row++;
             }
         }
-        cb(newBoard);
+        return newBoard;
     }
 };
 

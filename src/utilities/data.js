@@ -29,19 +29,3 @@ export const ships = [
         ship: [0, 0, 0],
     },
 ];
-
-export const initialPlayerShipState = () => ({
-    Carrier: [],
-    Battleship: [],
-    Cruiser: [],
-    Submarine: [],
-    Destroyer: [],
-});
-
-export const initialComputerShipState = () => ({
-    Carrier: [],
-    Battleship: [],
-    Cruiser: [],
-    Submarine: [],
-    Destroyer: [],
-});
