@@ -1,39 +1,42 @@
-import Button from '../other/button/Button';
+import Button from '../button/Button';
 
-import { generateComputerBoard } from '../../utilities/functions';
+import { buildBoard, generateComputerBoard, initialShipState } from '../../utilities/functions';
 
-const Controls = ({
-    setVertical,
-    setIsPlaying,
-    vertical,
-    setComputerBoard,
-    computerShipLocations,
-    readyToPlay,
-    isPlaying,
-    resetBoard,
-    gameover,
-    playerShipsLeft,
-}) => {
+const Controls = (props) => {
+    const resetBoard = () => {
+        props.setPlayerBoard(buildBoard());
+        props.setShipIdx(0);
+        props.setIsPlaying(false);
+        props.setPlayersTurn(true);
+        props.setComputerBoard(buildBoard());
+        props.setReadyToPlay(false);
+        props.setIsPlaying(false);
+        props.setPlayerShipsLeft(5);
+        props.setComputerShipsLeft(5);
+        props.setComputerShipLocations(initialShipState());
+        props.setPlayerShipLocations(initialShipState());
+        props.setGameover(false);
+    };
     return (
         <div style={{ marginTop: '15px' }}>
-            {!gameover && !readyToPlay && !isPlaying && (
-                <Button onClick={() => setVertical(!vertical)}>Change Direction</Button>
+            {!props.gameover && !props.readyToPlay && !props.isPlaying && (
+                <Button onClick={() => props.setVertical(!props.vertical)}>Change Direction</Button>
             )}
-            {!gameover && readyToPlay && !isPlaying && (
+            {!props.gameover && props.readyToPlay && !props.isPlaying && (
                 <Button
                     onClick={() => {
-                        setIsPlaying(true);
-                        setComputerBoard(generateComputerBoard(computerShipLocations));
+                        props.setIsPlaying(true);
+                        props.setComputerBoard(generateComputerBoard(props.computerShipLocations));
                     }}
                 >
                     Start
                 </Button>
             )}
-            {!gameover && <Button onClick={resetBoard}>Reset</Button>}
-            {gameover && (
+            {!props.gameover && <Button onClick={resetBoard}>Reset</Button>}
+            {props.gameover && (
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Button onClick={resetBoard}>Play Again?</Button>
-                    <h2 style={{ fontSize: '3rem' }}>{playerShipsLeft > 0 ? 'You Won!' : 'You Lost!'}</h2>
+                    <h2 style={{ fontSize: '3rem' }}>{props.playerShipsLeft > 0 ? 'You Won!' : 'You Lost!'}</h2>
                 </div>
             )}
         </div>

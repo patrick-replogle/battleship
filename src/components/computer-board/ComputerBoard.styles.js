@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { pickFontColor } from '../../utilities/functions';
+
 export const StyledGrid = styled.div`
     display: flex;
     flex-direction: column;
@@ -16,12 +18,3 @@ export const StyledCell = styled.div`
     justify-content: center;
     color: ${({ cell }) => pickFontColor(cell)};
 `;
-
-const pickFontColor = (cell) => {
-    if (cell.status === 'ocean') {
-        return 'white';
-    } else if (cell.status === 'hit' && cell.alive) {
-        return '#f44336';
-    }
-    return 'black';
-};

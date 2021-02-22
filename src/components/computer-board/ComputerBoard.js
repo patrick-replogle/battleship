@@ -1,4 +1,4 @@
-import { RowLabels, ColLabels } from '../other/grid-labels/GridLabels';
+import { RowLabels, ColLabels } from '../grid-labels/GridLabels';
 import { StyledGrid, StyledCell } from './ComputerBoard.styles';
 
 import { copyBoard, detectSink, generateMove } from '../../utilities/functions';
@@ -25,7 +25,10 @@ const ComputerBoard = (props) => {
             }
             props.setComputerBoard(copy);
             props.setPlayersTurn(false);
-            handleComputerTurn();
+
+            setTimeout(() => {
+                handleComputerTurn(); // trigger computer's turn after player moves
+            }, 200);
         }
     };
 
