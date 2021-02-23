@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 
-import GlobalStyles from './components/global-styles';
-import PlayerBoard from './components/player-board/PlayerBoard';
-import Footer from './components/footer/Footer';
-import ComputerBoard from './components/computer-board/ComputerBoard';
-import Controls from './components/controls/Controls';
-import Score from './components/score/Score';
+import GlobalStyles from '../../components/global-styles';
+import PlayerBoard from '../../components/player-board/PlayerBoard';
+import Footer from '../../components/footer/Footer';
+import ComputerBoard from '../../components/computer-board/ComputerBoard';
+import Controls from '../../components/controls/Controls';
+import Score from '../../components/score/Score';
+import { GameContainer } from './Game.styles';
 
-import { buildBoard, initialShipState } from './utilities/functions';
+import { buildBoard, initialShipState } from '../../utilities/functions';
 
-const App = () => {
+const Game = () => {
     // player state
     const [playerBoard, setPlayerBoard] = useState(buildBoard());
     const [playerWins, setPlayerWins] = useState(0);
@@ -39,7 +40,7 @@ const App = () => {
                     computerShipsLeft={computerShipsLeft}
                 />
                 <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-evenly', marginTop: '15px' }}>
+                    <GameContainer>
                         <PlayerBoard
                             playerBoard={playerBoard}
                             setPlayerBoard={setPlayerBoard}
@@ -72,7 +73,7 @@ const App = () => {
                             setReadyToPlay={setReadyToPlay}
                             setGameover={setGameover}
                         />
-                    </div>
+                    </GameContainer>
                 </div>
                 <Controls
                     vertical={vertical}
@@ -100,4 +101,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Game;
