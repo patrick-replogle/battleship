@@ -14,10 +14,13 @@ const PlayerBoard = ({
 }) => {
     const handleShipPlacement = (row, col) => {
         if (shipIdx < 5) {
-            setPlayerBoard(placeShip(row, col, playerBoard, shipIdx, vertical, playerShipLocations));
-            const nextState = shipIdx + 1;
-            setShipIdx(nextState);
-            if (shipIdx >= 4) setReadyToPlay(true);
+            let nextBoard = placeShip(row, col, playerBoard, shipIdx, vertical, playerShipLocations);
+            if (nextBoard) {
+                setPlayerBoard(nextBoard);
+                const nextShipIdx = shipIdx + 1;
+                setShipIdx(nextShipIdx);
+                if (shipIdx >= 4) setReadyToPlay(true);
+            }
         }
     };
 

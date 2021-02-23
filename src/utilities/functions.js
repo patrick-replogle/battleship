@@ -55,21 +55,6 @@ export const copyBoard = (currBoard) => {
     return newBoard;
 };
 
-export const isSpaceOccupied = (row, col, shipLen, vertical, board) => {
-    if (vertical) {
-        for (let k = 0; k < shipLen; k++) {
-            if (board[row][col].status === 'ship') return true;
-            row++;
-        }
-    } else {
-        for (let k = 0; k < shipLen; k++) {
-            if (board[row][col].status === 'ship') return true;
-            col++;
-        }
-    }
-    return false;
-};
-
 export const placeShip = (row, col, board, shipIdx, vertical, dict) => {
     if (shipIdx < ships.length) {
         const newBoard = copyBoard(board);
@@ -79,7 +64,7 @@ export const placeShip = (row, col, board, shipIdx, vertical, dict) => {
             const diff = newBoard[0].length - (col + shipLen);
 
             if (diff < 0) col += diff;
-            if (isSpaceOccupied(row, col, shipLen, vertical, board)) return;
+            if (!checkIfVacant(row, col, shipLen, board, vertical)) return false;
 
             for (let k = 0; k < shipLen; k++) {
                 dict[ships[shipIdx].name].push([row, col]);
@@ -90,7 +75,7 @@ export const placeShip = (row, col, board, shipIdx, vertical, dict) => {
             const diff = newBoard.length - (row + shipLen);
 
             if (diff < 0) row += diff;
-            if (isSpaceOccupied(row, col, shipLen, vertical, board)) return;
+            if (!checkIfVacant(row, col, shipLen, board, vertical)) return false;
 
             for (let k = 0; k < shipLen; k++) {
                 newBoard[row][col].status = 'ship';

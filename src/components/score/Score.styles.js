@@ -27,4 +27,8 @@ export const StyledScoreContainer = styled.div`
 export const StyledTitleContainer = styled.div`
     display: flex;
     align-items: center;
+
+    @media (max-width: 900px) {
+        display: none;
+    }
 `;
