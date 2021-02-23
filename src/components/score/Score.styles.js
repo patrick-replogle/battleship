@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Icon } from '@iconify/react';
 
 export const StyledContainer = styled.div`
     display: flex;
@@ -27,6 +28,20 @@ export const StyledScoreContainer = styled.div`
 export const StyledTitleContainer = styled.div`
     display: flex;
     align-items: center;
+
+    h1 {
+        font-size: 4rem;
+        margin: 0 5%;
+
+        @media (max-width: 700px) {
+            display: none;
+        }
+    }
+`;
+
+export const StyledIcon = styled(Icon)`
+    font-size: 8rem;
+    color: #f44336;
 
     @media (max-width: 900px) {
         display: none;

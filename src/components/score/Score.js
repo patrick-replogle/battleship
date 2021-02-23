@@ -3,7 +3,7 @@ import classicComputer from '@iconify-icons/entypo/classic-computer';
 import userAvatarFilled from '@iconify-icons/carbon/user-avatar-filled';
 import mineIcon from '@iconify-icons/mdi/mine';
 
-import { StyledContainer, StyledDiv, StyledScoreContainer, StyledTitleContainer } from './Score.styles';
+import { StyledContainer, StyledDiv, StyledScoreContainer, StyledTitleContainer, StyledIcon } from './Score.styles';
 
 const Score = ({ playerShipsLeft, playerWins, computerShipsLeft, computerWins }) => {
     return (
@@ -17,9 +17,9 @@ const Score = ({ playerShipsLeft, playerWins, computerShipsLeft, computerWins })
                     </div>
                 </StyledScoreContainer>
                 <StyledTitleContainer>
-                    <Icon icon={mineIcon} style={{ fontSize: '7rem', color: '#f44336' }} />
-                    <h1 style={{ fontSize: '3rem', margin: '0 5%' }}>BATTLESHIP</h1>
-                    <Icon icon={mineIcon} style={{ fontSize: '7rem', color: '#f44336' }} />
+                    <StyledIcon icon={mineIcon} />
+                    <h1>BATTLESHIP</h1>
+                    <StyledIcon icon={mineIcon} />
                 </StyledTitleContainer>
                 <StyledScoreContainer direction="flex-end">
                     <Icon icon={classicComputer} style={{ fontSize: '7rem' }} />

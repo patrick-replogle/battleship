@@ -18,7 +18,7 @@ const Controls = (props) => {
         props.setGameover(false);
     };
     return (
-        <div style={{ marginTop: '15px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px', marginLeft: '4%', width: '100%' }}>
             {!props.gameover && !props.readyToPlay && !props.isPlaying && (
                 <Button onClick={() => props.setVertical(!props.vertical)}>Change Direction</Button>
             )}

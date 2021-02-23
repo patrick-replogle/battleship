@@ -24,33 +24,36 @@ const ComputerBoard = (props) => {
                 }
             }
             props.setComputerBoard(copy);
-            props.setPlayersTurn(false);
-
             setTimeout(() => {
-                handleComputerTurn(); // trigger computer's turn after player moves
-            }, 200);
+                props.setPlayersTurn(false);
+                handleComputerTurn();
+            }, 600);
         }
     };
 
     const handleComputerTurn = () => {
-        const playerCopy = copyBoard(props.playerBoard);
-        const [x, y] = generateMove(playerCopy);
+        setTimeout(() => {
+            const playerCopy = copyBoard(props.playerBoard);
+            const [x, y] = generateMove(playerCopy);
 
-        if (playerCopy[x][y].status === 'hit') {
-            if (detectSink(x, y, props.playerShipLocations, playerCopy)) {
-                let nextState = props.playerShipsLeft - 1;
-                props.setPlayerShipsLeft(nextState);
-                if (nextState === 0) {
-                    props.setGameover(true);
-                    props.setPlayerBoard(playerCopy);
-                    props.setIsPlaying(false);
-                    props.setComputerWins(props.computerWins + 1);
-                    return;
+            if (playerCopy[x][y].status === 'hit') {
+                if (detectSink(x, y, props.playerShipLocations, playerCopy)) {
+                    let nextState = props.playerShipsLeft - 1;
+                    props.setPlayerShipsLeft(nextState);
+                    if (nextState === 0) {
+                        props.setGameover(true);
+                        props.setPlayerBoard(playerCopy);
+                        props.setIsPlaying(false);
+                        props.setComputerWins(props.computerWins + 1);
+                        return;
+                    }
                 }
             }
-        }
-        props.setPlayerBoard(playerCopy);
-        props.setPlayersTurn(true);
+            props.setPlayerBoard(playerCopy);
+            setTimeout(() => {
+                props.setPlayersTurn(true);
+            }, 600);
+        }, 600);
     };
 
     return (
@@ -58,7 +61,6 @@ const ComputerBoard = (props) => {
             <ColLabels />
             <div style={{ display: 'flex' }}>
                 <RowLabels />
-
                 {props.computerBoard.map((row, i) => {
                     return (
                         <StyledGrid key={i}>
