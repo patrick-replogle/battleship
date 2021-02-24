@@ -19,7 +19,7 @@ export const StyledCell = styled.div`
     color: ${({ cell }) => pickFontColor(cell)};
 
     @media (max-width: 500px) {
-        width: 35px;
-        height: 35px;
+        width: 32px;
+        height: 32px;
     }
 `;

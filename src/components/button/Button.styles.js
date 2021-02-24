@@ -12,6 +12,11 @@ export const StyledButton = styled.button`
     border: 1px solid white;
     background-color: #f44336;
 
+    @media (max-width: 500px) {
+        padding: 10px 30px;
+        margin-right: 2%;
+    }
+
     &:hover {
         opacity: 0.7;
     }

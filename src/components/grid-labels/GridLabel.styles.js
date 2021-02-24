@@ -11,8 +11,8 @@ export const StyledRowLabelContainer = styled.div`
         font-size: 2rem;
 
         @media (max-width: 500px) {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
         }
     }
 `;
@@ -27,8 +27,8 @@ export const StyledColLabelContainer = styled.div`
         font-size: 2rem;
 
         @media (max-width: 500px) {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
         }
     }
 `;
