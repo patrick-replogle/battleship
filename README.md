@@ -8,9 +8,9 @@ Based off of the popular board game, Battledship is a two player strategy type g
 This project was created using React and styled-components
 
 ## Ships
-|  Ship        | Size |
+|Ship          | Size |
 | ------------:| ----:|
-| Carrier      | 5    |
+|Carrier       | 5    |
 | Battleship   | 4    |
 | Destroyer    | 3    |
 | Submarine    | 3    |
