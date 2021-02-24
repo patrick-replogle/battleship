@@ -1,6 +1,6 @@
-export const rowLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+export const colLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-export const colLabels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+export const rowLabels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
 export const ships = [
     {
