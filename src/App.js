@@ -32,7 +32,7 @@ const App = () => {
     return (
         <>
             <GlobalStyles />
-            <div style={{ position: 'relative' }}>
+            <div>
                 <Score
                     playerWins={playerWins}
                     computerWins={computerWins}

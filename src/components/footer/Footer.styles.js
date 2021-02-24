@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
-    position: absolute;
+    display: block;
+    bottom: 0;
     background: #303030;
     color: white;
     align-items: center;
