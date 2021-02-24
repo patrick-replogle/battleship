@@ -7,7 +7,7 @@ import ComputerBoard from './components/computer-board/ComputerBoard';
 import Controls from './components/controls/Controls';
 import Score from './components/score/Score';
 
-import { buildBoard, initialShipState } from './utilities/functions';
+import { buildBoard, initialShipState } from './utilities/sharedFunctions';
 
 const App = () => {
     // player state
@@ -99,6 +99,7 @@ const App = () => {
                     setComputerShipLocations={setComputerShipLocations}
                     setPlayerShipLocations={setPlayerShipLocations}
                     setGameover={setGameover}
+                    setClicked={setClicked}
                 />
             </div>
             <Footer />
