@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { pickFontColor } from '../../utilities/functions';
+import { pickFontColor } from '../../utilities/sharedFunctions';
 
 export const StyledGrid = styled.div`
     display: flex;

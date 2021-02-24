@@ -1,11 +1,18 @@
 import { RowLabels, ColLabels } from '../grid-labels/GridLabels';
 import { StyledGrid, StyledCell } from './ComputerBoard.styles';
 
-import { copyBoard, detectSink, generateMove } from '../../utilities/functions';
+import { copyBoard, detectSink } from '../../utilities/sharedFunctions';
+import { generateMove } from '../../utilities/computerBoardFunctions';
 
 const ComputerBoard = (props) => {
     const handlePlayerTurn = (row, col) => {
-        if (!props.clicked && props.isPlaying && props.playersTurn && !props.computerBoard[row][col].clicked) {
+        if (
+            !props.clicked &&
+            !props.gameover &&
+            props.isPlaying &&
+            props.playersTurn &&
+            !props.computerBoard[row][col].clicked
+        ) {
             props.setClicked(true);
             const copy = copyBoard(props.computerBoard);
             copy[row][col].clicked = true;
@@ -18,9 +25,7 @@ const ComputerBoard = (props) => {
                     if (nextState === 0) {
                         props.setGameover(true);
                         props.setComputerBoard(copy);
-                        props.setIsPlaying(false);
                         props.setPlayerWins(props.playerWins + 1);
-                        props.setClicked(false);
                         return;
                     }
                 }
@@ -36,7 +41,7 @@ const ComputerBoard = (props) => {
     const handleComputerTurn = () => {
         setTimeout(() => {
             const playerCopy = copyBoard(props.playerBoard);
-            const [x, y] = generateMove(playerCopy);
+            const [x, y] = generateMove(playerCopy, props.playerShipLocations);
 
             if (playerCopy[x][y].status === 'hit') {
                 if (detectSink(x, y, props.playerShipLocations, playerCopy)) {
@@ -45,7 +50,6 @@ const ComputerBoard = (props) => {
                     if (nextState === 0) {
                         props.setGameover(true);
                         props.setPlayerBoard(playerCopy);
-                        props.setIsPlaying(false);
                         props.setComputerWins(props.computerWins + 1);
                         return;
                     }

@@ -1,6 +1,7 @@
 import Button from '../button/Button';
 
-import { buildBoard, generateComputerBoard, initialShipState } from '../../utilities/functions';
+import { buildBoard, initialShipState } from '../../utilities/sharedFunctions';
+import { generateComputerBoard } from '../../utilities/computerBoardFunctions';
 
 const Controls = (props) => {
     const resetBoard = () => {
@@ -16,6 +17,7 @@ const Controls = (props) => {
         props.setComputerShipLocations(initialShipState());
         props.setPlayerShipLocations(initialShipState());
         props.setGameover(false);
+        props.setClicked(false);
     };
     return (
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px', marginLeft: '4%', width: '100%' }}>
