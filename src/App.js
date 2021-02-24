@@ -32,7 +32,14 @@ const App = () => {
     return (
         <>
             <GlobalStyles />
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
                 <Score
                     playerWins={playerWins}
                     computerWins={computerWins}
@@ -101,8 +108,8 @@ const App = () => {
                     setGameover={setGameover}
                     setClicked={setClicked}
                 />
+                <Footer />
             </div>
-            <Footer />
         </>
     );
 };
