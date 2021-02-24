@@ -32,14 +32,7 @@ const App = () => {
     return (
         <>
             <GlobalStyles />
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
+            <div style={{ position: 'relative' }}>
                 <Score
                     playerWins={playerWins}
                     computerWins={computerWins}
