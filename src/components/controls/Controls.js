@@ -34,9 +34,16 @@ const Controls = (props) => {
             )}
             {!props.gameover && <Button onClick={resetBoard}>Reset</Button>}
             {props.gameover && (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100%',
+                    }}
+                >
                     <Button onClick={resetBoard}>Play Again?</Button>
-                    <h2 style={{ fontSize: '3rem' }}>{props.playerShipsLeft > 0 ? 'You Won!' : 'You Lost!'}</h2>
+                    <h2 style={{ fontSize: '2rem' }}>{props.playerShipsLeft > 0 ? 'You Won!' : 'You Lost!'}</h2>
                 </div>
             )}
         </div>

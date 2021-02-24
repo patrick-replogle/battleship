@@ -27,6 +27,7 @@ const App = () => {
     const [shipIdx, setShipIdx] = useState(0);
     const [vertical, setVertical] = useState(false);
     const [readyToPlay, setReadyToPlay] = useState(false);
+    const [clicked, setClicked] = useState(false);
 
     return (
         <>
@@ -73,6 +74,8 @@ const App = () => {
                                 playerShipLocations={playerShipLocations}
                                 setReadyToPlay={setReadyToPlay}
                                 setGameover={setGameover}
+                                clicked={clicked}
+                                setClicked={setClicked}
                             />
                         )}
                     </div>

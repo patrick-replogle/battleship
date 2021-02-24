@@ -5,7 +5,8 @@ import { copyBoard, detectSink, generateMove } from '../../utilities/functions';
 
 const ComputerBoard = (props) => {
     const handlePlayerTurn = (row, col) => {
-        if (props.isPlaying && props.playersTurn && !props.computerBoard[row][col].clicked) {
+        if (!props.clicked && props.isPlaying && props.playersTurn && !props.computerBoard[row][col].clicked) {
+            props.setClicked(true);
             const copy = copyBoard(props.computerBoard);
             copy[row][col].clicked = true;
 
@@ -19,6 +20,7 @@ const ComputerBoard = (props) => {
                         props.setComputerBoard(copy);
                         props.setIsPlaying(false);
                         props.setPlayerWins(props.playerWins + 1);
+                        props.setClicked(false);
                         return;
                     }
                 }
@@ -27,7 +29,7 @@ const ComputerBoard = (props) => {
             setTimeout(() => {
                 props.setPlayersTurn(false);
                 handleComputerTurn();
-            }, 600);
+            }, 400);
         }
     };
 
@@ -51,9 +53,10 @@ const ComputerBoard = (props) => {
             }
             props.setPlayerBoard(playerCopy);
             setTimeout(() => {
+                props.setClicked(false);
                 props.setPlayersTurn(true);
-            }, 600);
-        }, 600);
+            }, 400);
+        }, 400);
     };
 
     return (
