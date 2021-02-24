@@ -210,12 +210,14 @@ export const generateMove = (playerBoard) => {
                 playerBoard[row][col].status === 'hit' &&
                 playerBoard[row][col].alive
             ) {
-                let nextMoves = getValidMoves(playerBoard, row, col); // there is an active ship that has been struck so run dfs to determine a next move
+                let logicalNextMoveAfterHit = findNextMoveAfterHit(playerBoard, row, col);
+                if (logicalNextMoveAfterHit) return logicalNextMoveAfterHit; // found a pattern that lead to a logical next move
+
+                let nextMoves = getValidMoves(playerBoard, row, col); // ship has only been hit once so select a valid neighbor cell at random
                 if (nextMoves.length) {
-                    let [x, y] = nextMoves.pop();
-                    playerBoard[x][y].clicked = true;
-                    playerBoard[x][y].status = 'hit';
-                    return [x, y];
+                    let randomIdx = Math.floor(Math.random() * nextMoves.length);
+                    let [x, y] = nextMoves[randomIdx];
+                    return updateBoardAfterMove(playerBoard, x, y);
                 }
             }
         }
@@ -223,33 +225,110 @@ export const generateMove = (playerBoard) => {
     return generateRandomMove(playerBoard); // no active ships are hit so choose at random
 };
 
-const generateRandomMove = (playerBoard) => {
-    while (true) {
-        let row = Math.floor(Math.random() * 10);
-        let col = Math.floor(Math.random() * 10);
+const findNextMoveAfterHit = (playerBoard, row, col) => {
+    if (
+        col > 0 &&
+        col < 9 &&
+        playerBoard[row][col + 1].status === 'hit' &&
+        playerBoard[row][col + 1].alive &&
+        !playerBoard[row][col - 1].clicked
+    ) {
+        return updateBoardAfterMove(playerBoard, row, col - 1);
+    }
+    if (col < 9 && playerBoard[row][col + 1].status === 'hit' && playerBoard[row][col + 1].alive) {
+        let j = col + 1;
 
-        if (playerBoard[row][col].clicked) continue;
+        while (j < 10 && playerBoard[row][j].clicked && playerBoard[row][j].alive) j++;
 
-        playerBoard[row][col].clicked = true;
-        if (playerBoard[row][col].status === 'ship') {
-            playerBoard[row][col].status = 'hit';
+        if (j < 10 && !playerBoard[row][j].clicked) {
+            return updateBoardAfterMove(playerBoard, row, j);
         }
-        return [row, col];
+    }
+    if (
+        row > 0 &&
+        row < 9 &&
+        playerBoard[row + 1][col].status === 'hit' &&
+        playerBoard[row + 1][col].alive &&
+        !playerBoard[row - 1][col].clicked
+    ) {
+        return updateBoardAfterMove(playerBoard, row - 1, col);
+    }
+    if (row < 9 && playerBoard[row + 1][col].status === 'hit' && playerBoard[row + 1][col].alive) {
+        let i = row + 1;
+
+        while (i < 10 && playerBoard[i][col].clicked && playerBoard[i][col].alive) i++;
+
+        if (i < 10 && !playerBoard[i][col].clicked) {
+            return updateBoardAfterMove(playerBoard, i, col);
+        }
+    }
+    return false;
+};
+
+const updateBoardAfterMove = (board, row, col) => {
+    board[row][col].clicked = true;
+    if (board[row][col].status === 'ship') {
+        board[row][col].status = 'hit';
+    }
+    return [row, col];
+};
+
+const generateRandomMove = (playerBoard) => {
+    let rows = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let cols = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    playerBoard.forEach((row, i) => {
+        row.forEach((col, j) => {
+            if (playerBoard[i][j].clicked) {
+                rows[i]++;
+                cols[j]++;
+            }
+        });
+    });
+
+    let minRow = Math.min(...rows);
+    let minRowIdx = rows.indexOf(minRow);
+    let minCol = Math.min(...cols);
+    let minColIdx = cols.indexOf(minCol);
+
+    if (minRow < minCol) {
+        console.log('minRow');
+        for (let j = 0; j < 10; j++) {
+            if (!playerBoard[minRowIdx][j].clicked) {
+                return updateBoardAfterMove(playerBoard, minRowIdx, j);
+            }
+        }
+    } else if (minCol < minRow) {
+        console.log('minCol');
+        for (let i = 0; i < 10; i++) {
+            if (!playerBoard[i][minColIdx].clicked) {
+                return updateBoardAfterMove(playerBoard, i, minColIdx);
+            }
+        }
+    } else {
+        console.log('random');
+        while (true) {
+            let row = Math.floor(Math.random() * 10);
+            let col = Math.floor(Math.random() * 10);
+
+            if (playerBoard[row][col].clicked) continue;
+            return updateBoardAfterMove(playerBoard, row, col);
+        }
     }
 };
 
 const getValidMoves = (playerBoard, row, col) => {
     let neighbors = [];
     let moves = [
-        [-1, 0], // North
-        [0, -1], // West
-        [1, 0], // South
-        [0, 1], // East
+        [-1, 0],
+        [0, -1],
+        [1, 0],
+        [0, 1],
     ];
 
     function DFS(i, j) {
         if (i < 0 || i >= playerBoard.length || j < 0 || j >= playerBoard[0].length) return; // out of bounds
-        if (playerBoard[i][j].status !== 'ship' || !playerBoard[i][j].alive || playerBoard[i][j].clicked) return; // doesn't meet criteria
+        if (!playerBoard[i][j].alive || playerBoard[i][j].clicked) return; // doesn't meet criteria
         neighbors.push([i, j]); // found a potential nextMove
     }
     moves.forEach((move) => DFS(row + move[0], col + move[1]));
