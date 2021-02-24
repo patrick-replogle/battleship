@@ -4,7 +4,7 @@ Deployed URL: https://battleship-1rqy67afs-patrickr1138.vercel.app/
 
 ## Project Overview
 
-Based off of the popular board game, Battledship is a two player strategy type guessing game. It is played on ruled grids on which each player's fleet of ships are marked. The locations of the fleets are concealed from the other player and players alternate turns calling "shots" at the other player's ships. The second player in this implementation of Battleship is played by the computer. Destroy all five of the computer's ships and you win the game!
+Based off of the popular board game, Battleship is a two player strategy type guessing game. It is played on ruled grids on which each player's fleet of ships are marked. The locations of the fleets are concealed from the other player and players alternate turns calling "shots" at the other player's ships. The second player in this implementation of Battleship is played by the computer. Destroy all five of the computer's ships and you win the game!
 
 This project was created using React and styled-components
 
