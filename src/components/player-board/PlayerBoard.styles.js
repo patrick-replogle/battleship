@@ -17,4 +17,9 @@ export const StyledCell = styled.div`
     justify-content: center;
     color: ${({ cell }) => pickFontColor(cell)};
     background: ${({ cell }) => pickBackgroundColor(cell)};
+
+    @media (max-width: 500px) {
+        width: 35px;
+        height: 35px;
+    }
 `;

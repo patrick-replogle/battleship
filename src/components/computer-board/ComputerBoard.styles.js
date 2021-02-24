@@ -17,4 +17,9 @@ export const StyledCell = styled.div`
     align-items: center;
     justify-content: center;
     color: ${({ cell }) => pickFontColor(cell)};
+
+    @media (max-width: 500px) {
+        width: 35px;
+        height: 35px;
+    }
 `;
