@@ -1,4 +1,5 @@
 import Button from '../button/Button';
+import { MainContainer, GameoverContainer } from './Controls.styles';
 
 import { buildBoard, initialShipState } from '../../utilities/sharedFunctions';
 import { generateComputerBoard } from '../../utilities/computerBoardFunctions';
@@ -20,7 +21,7 @@ const Controls = (props) => {
         props.setClicked(false);
     };
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px', marginLeft: '4%', width: '100%' }}>
+        <MainContainer>
             {!props.gameover && !props.readyToPlay && !props.isPlaying && (
                 <Button onClick={() => props.setVertical(!props.vertical)}>Change Direction</Button>
             )}
@@ -36,19 +37,12 @@ const Controls = (props) => {
             )}
             {!props.gameover && <Button onClick={resetBoard}>Reset</Button>}
             {props.gameover && (
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                    }}
-                >
+                <GameoverContainer>
                     <Button onClick={resetBoard}>Play Again?</Button>
                     <h2 style={{ fontSize: '2rem' }}>{props.playerShipsLeft > 0 ? 'You Won!' : 'You Lost!'}</h2>
-                </div>
+                </GameoverContainer>
             )}
-        </div>
+        </MainContainer>
     );
 };
 

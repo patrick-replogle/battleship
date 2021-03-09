@@ -10,9 +10,14 @@ export const StyledRowLabelContainer = styled.div`
         height: 40px;
         font-size: 2rem;
 
+        @media (max-width: 600px) {
+            width: 34px;
+            height: 34px;
+        }
+
         @media (max-width: 500px) {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
         }
     }
 `;
@@ -26,9 +31,14 @@ export const StyledColLabelContainer = styled.div`
         height: 40px;
         font-size: 2rem;
 
+        @media (max-width: 600px) {
+            width: 34px;
+            height: 34px;
+        }
+
         @media (max-width: 500px) {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
         }
     }
 `;

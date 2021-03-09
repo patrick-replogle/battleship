@@ -39,6 +39,14 @@ export const StyledTitleContainer = styled.div`
     }
 `;
 
+export const StyledAvatarIcon = styled(Icon)`
+    font-size: ${({ size }) => size};
+
+    @media (max-width: 500px) {
+        font-size: 6rem;
+    }
+`;
+
 export const StyledIcon = styled(Icon)`
     font-size: 8rem;
     color: #f44336;
