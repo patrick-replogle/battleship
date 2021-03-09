@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
-    display: block;
+    position: absolute;
     bottom: 0;
     background: #303030;
     color: white;
@@ -10,7 +10,6 @@ export const FooterContainer = styled.div`
     height: 70px;
     justify-content: center;
     width: 100vw;
-    margin-top: 40px;
     -webkit-box-shadow: 0px 2px 15px -8px rgba(0, 0, 0, 0.42);
     -moz-box-shadow: 0px 2px 15px -8px rgba(0, 0, 0, 0.42);
     box-shadow: 0px 2px 15px -8px rgba(0, 0, 0, 0.42);

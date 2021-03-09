@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import GlobalStyles from './components/global-styles';
+import { GlobalStyles, GameContainer } from './components/global-styles';
 import PlayerBoard from './components/player-board/PlayerBoard';
 import Footer from './components/footer/Footer';
 import ComputerBoard from './components/computer-board/ComputerBoard';
@@ -30,7 +30,7 @@ const App = () => {
     const [clicked, setClicked] = useState(false);
 
     return (
-        <>
+        <GameContainer>
             <GlobalStyles />
             <div>
                 <Score
@@ -103,7 +103,7 @@ const App = () => {
                 />
                 <Footer />
             </div>
-        </>
+        </GameContainer>
     );
 };
 

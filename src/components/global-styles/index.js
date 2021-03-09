@@ -1,12 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 
-const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
     * {
         box-sizing: border-box;
     }
 
     body {
-        min-height: 100vh;
         background-color:#121212;
         color: white;
     }
@@ -19,7 +19,15 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         text-align: center;
+        height: 100%;
+        position: relative;
     }
 `;
 
-export default GlobalStyles;
+export const GameContainer = styled.div`
+    min-height: 100vh;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 70px;
+`;
