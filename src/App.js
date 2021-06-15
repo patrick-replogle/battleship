@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { GlobalStyles } from './components/global-styles';
+import { GlobalStyles, StyledBoardContainer, StyledMainContainer } from './components/global-styles';
 import PlayerBoard from './components/player-board/PlayerBoard';
 import Footer from './components/footer/Footer';
 import ComputerBoard from './components/computer-board/ComputerBoard';
@@ -32,7 +32,7 @@ const App = () => {
     return (
         <>
             <GlobalStyles />
-            <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
+            <StyledMainContainer>
                 <div style={{ paddingBottom: '6rem' }}>
                     <Score
                         playerWins={playerWins}
@@ -41,7 +41,7 @@ const App = () => {
                         computerShipsLeft={computerShipsLeft}
                     />
                     <div>
-                        <div style={{ display: 'flex', marginTop: '15px', justifyContent: 'center' }}>
+                        <StyledBoardContainer>
                             {!isPlaying || (isPlaying && !playersTurn) ? (
                                 <PlayerBoard
                                     playerBoard={playerBoard}
@@ -79,7 +79,7 @@ const App = () => {
                                     setClicked={setClicked}
                                 />
                             )}
-                        </div>
+                        </StyledBoardContainer>
                     </div>
                     <Controls
                         vertical={vertical}
@@ -104,7 +104,7 @@ const App = () => {
                     />
                 </div>
                 <Footer />
-            </div>
+            </StyledMainContainer>
         </>
     );
 };

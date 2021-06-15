@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
     * {
@@ -20,4 +21,16 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         text-align: center;
     }
+`;
+
+export const StyledMainContainer = styled.div`
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+`;
+
+export const StyledBoardContainer = styled.div`
+    display: flex;
+    margin-top: 15px;
+    justify-content: center;
 `;
