@@ -19,5 +19,11 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         text-align: center;
+<<<<<<< HEAD
+=======
+        height: 100%;
+        position: relative;
+        overflow-x: hidden;
+>>>>>>> 05554cae917ec659cdebcdd81bffdc73b65270d0
     }
 `;
