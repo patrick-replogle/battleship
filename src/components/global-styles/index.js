@@ -21,6 +21,7 @@ export const GlobalStyles = createGlobalStyle`
         text-align: center;
         height: 100%;
         position: relative;
+        overflow-x: hidden;
     }
 `;
 
