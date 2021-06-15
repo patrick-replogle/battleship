@@ -34,7 +34,7 @@ const ComputerBoard = (props) => {
             setTimeout(() => {
                 props.setPlayersTurn(false);
                 handleComputerTurn();
-            }, 400);
+            }, 500);
         }
     };
 
@@ -59,8 +59,8 @@ const ComputerBoard = (props) => {
             setTimeout(() => {
                 props.setClicked(false);
                 props.setPlayersTurn(true);
-            }, 400);
-        }, 400);
+            }, 500);
+        }, 500);
     };
 
     return (

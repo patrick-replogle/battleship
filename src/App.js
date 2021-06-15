@@ -32,7 +32,7 @@ const App = () => {
     return (
         <GameContainer>
             <GlobalStyles />
-            <div>
+            <div style={{ position: 'relative', minHeight: '100vh' }}>
                 <Score
                     playerWins={playerWins}
                     computerWins={computerWins}
