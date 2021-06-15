@@ -26,8 +26,4 @@ export const GlobalStyles = createGlobalStyle`
 
 export const GameContainer = styled.div`
     min-height: 100vh;
-    overflow: hidden;
-    display: block;
-    position: relative;
-    padding-bottom: 70px;
 `;

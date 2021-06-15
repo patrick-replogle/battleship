@@ -9,7 +9,7 @@ export const FooterContainer = styled.div`
     display: flex;
     height: 70px;
     justify-content: center;
-    width: 100vw;
+    width: 100%;
     -webkit-box-shadow: 0px 2px 15px -8px rgba(0, 0, 0, 0.42);
     -moz-box-shadow: 0px 2px 15px -8px rgba(0, 0, 0, 0.42);
     box-shadow: 0px 2px 15px -8px rgba(0, 0, 0, 0.42);
