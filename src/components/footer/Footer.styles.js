@@ -7,7 +7,7 @@ export const FooterContainer = styled.div`
     color: white;
     align-items: center;
     display: flex;
-    height: 70px;
+    height: 6rem;
     justify-content: center;
     width: 100%;
     -webkit-box-shadow: 0px 2px 15px -8px rgba(0, 0, 0, 0.42);
