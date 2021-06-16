@@ -8,11 +8,11 @@ export const StyledGrid = styled.div`
 `;
 
 export const StyledCell = styled.div`
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border: 1px solid white;
     background: #006994;
-    font-size: 4.4rem;
+    font-size: 4.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
