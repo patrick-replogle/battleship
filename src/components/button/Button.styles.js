@@ -15,6 +15,7 @@ export const StyledButton = styled.button`
     @media (max-width: 500px) {
         padding: 10px 30px;
         margin-right: 2%;
+        font-size: 1.4rem;
     }
 
     &:hover {

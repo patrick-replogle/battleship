@@ -16,8 +16,8 @@ export const StyledRowLabelContainer = styled.div`
         }
 
         @media (max-width: 500px) {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
         }
     }
 `;
@@ -37,8 +37,8 @@ export const StyledColLabelContainer = styled.div`
         }
 
         @media (max-width: 500px) {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
         }
     }
 `;
