@@ -1,6 +1,6 @@
 # Battleship
 
-Deployed URL: https://battleship-1rqy67afs-patrickr1138.vercel.app/
+Deployed URL: https://battleship-patrickr1138.vercel.app
 
 ## Project Overview
 
