@@ -7,16 +7,22 @@ export const StyledGrid = styled.div`
 `;
 
 export const StyledCell = styled.div`
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
     border: 1px solid white;
     color: white;
-    font-size: 4rem;
+    font-size: 4.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
     color: ${({ cell }) => pickFontColor(cell)};
     background: ${({ cell }) => pickBackgroundColor(cell)};
+
+    @media (max-width: 1280px) {
+        width: 40px;
+        height: 40px;
+        font-size: 4rem;
+    }
 
     @media (max-width: 600px) {
         width: 34px;

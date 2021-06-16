@@ -6,9 +6,15 @@ export const StyledRowLabelContainer = styled.div`
     margin-top: 10px;
 
     div {
-        width: 40px;
-        height: 40px;
-        font-size: 2rem;
+        width: 55px;
+        height: 55px;
+        font-size: 2.5rem;
+
+        @media (max-width: 1280px) {
+            width: 40px;
+            height: 40px;
+            font-size: 2rem;
+        }
 
         @media (max-width: 600px) {
             width: 34px;
@@ -27,9 +33,15 @@ export const StyledColLabelContainer = styled.div`
     margin-left: 35px;
 
     div {
-        width: 40px;
-        height: 40px;
-        font-size: 2rem;
+        width: 55px;
+        height: 55px;
+        font-size: 2.5rem;
+
+        @media (max-width: 1280px) {
+            width: 40px;
+            height: 40px;
+            font-size: 2rem;
+        }
 
         @media (max-width: 600px) {
             width: 34px;
