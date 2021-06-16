@@ -10,7 +10,7 @@ export const StyledRowLabelContainer = styled.div`
         height: 50px;
         font-size: 2.6rem;
 
-        @media (max-width: 1280px) {
+        @media (max-width: 1400px) {
             width: 40px;
             height: 40px;
             font-size: 2rem;
@@ -30,10 +30,10 @@ export const StyledRowLabelContainer = styled.div`
 
 export const StyledColLabelContainer = styled.div`
     display: flex;
-    margin-left: 40px;
+    margin-left: 45px;
 
-    @media (max-width: 1280px) {
-        margin-left: 35px;
+    @media (max-width: 1400px) {
+        margin-left: 37px;
     }
 
     @media (max-width: 600px) {
@@ -45,7 +45,7 @@ export const StyledColLabelContainer = styled.div`
         height: 50px;
         font-size: 2.6rem;
 
-        @media (max-width: 1280px) {
+        @media (max-width: 1400px) {
             width: 40px;
             height: 40px;
             font-size: 2rem;

@@ -18,7 +18,7 @@ export const StyledCell = styled.div`
     color: ${({ cell }) => pickFontColor(cell)};
     background: ${({ cell }) => pickBackgroundColor(cell)};
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1400px) {
         width: 40px;
         height: 40px;
         font-size: 4rem;
