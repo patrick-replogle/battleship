@@ -25,8 +25,8 @@ export const StyledCell = styled.div`
     }
 
     @media (max-width: 600px) {
-        width: 32px;
-        height: 32px;
+        width: 33px;
+        height: 33px;
     }
 
     @media (max-width: 500px) {
