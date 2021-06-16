@@ -17,8 +17,9 @@ export const StyledRowLabelContainer = styled.div`
         }
 
         @media (max-width: 600px) {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
+            font-size: 1.8rem;
         }
 
         @media (max-width: 500px) {
@@ -52,8 +53,9 @@ export const StyledColLabelContainer = styled.div`
         }
 
         @media (max-width: 600px) {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
+            font-size: 1.8rem;
         }
 
         @media (max-width: 500px) {
