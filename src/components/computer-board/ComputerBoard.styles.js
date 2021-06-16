@@ -24,12 +24,14 @@ export const StyledCell = styled.div`
         font-size: 4rem;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 500px) {
+        width: 34px;
+        height: 34px;
         font-size: 2.8rem;
     }
 
-    @media (max-width: 500px) {
-        width: 30px;
-        height: 30px;
+    @media (max-width: 400px) {
+        width: 28px;
+        height: 28px;
     }
 `;

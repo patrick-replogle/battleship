@@ -16,15 +16,14 @@ export const StyledRowLabelContainer = styled.div`
             font-size: 2rem;
         }
 
-        @media (max-width: 600px) {
-            width: 36px;
-            height: 36px;
-            font-size: 1.8rem;
+        @media (max-width: 500px) {
+            width: 34px;
+            height: 34px;
         }
 
-        @media (max-width: 500px) {
-            width: 30px;
-            height: 30px;
+        @media (max-width: 400px) {
+            width: 28px;
+            height: 28px;
         }
     }
 `;
@@ -35,10 +34,6 @@ export const StyledColLabelContainer = styled.div`
 
     @media (max-width: 1400px) {
         margin-left: 37px;
-    }
-
-    @media (max-width: 600px) {
-        margin-left: 30px;
     }
 
     div {
@@ -52,15 +47,14 @@ export const StyledColLabelContainer = styled.div`
             font-size: 2rem;
         }
 
-        @media (max-width: 600px) {
-            width: 36px;
-            height: 36px;
-            font-size: 1.8rem;
+        @media (max-width: 500px) {
+            width: 34px;
+            height: 34px;
         }
 
-        @media (max-width: 500px) {
-            width: 30px;
-            height: 30px;
+        @media (max-width: 400px) {
+            width: 28px;
+            height: 28px;
         }
     }
 `;
